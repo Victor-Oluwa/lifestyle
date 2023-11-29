@@ -75,6 +75,7 @@ ios/Flutter/DebugInfo.plist
 .vscode/
 *.lock
 *.log
+*.hprof
 .env
 
 # Generated files
