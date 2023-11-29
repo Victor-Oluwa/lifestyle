@@ -1,0 +1,121 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+
+import 'package:lifestyle/Common/widgets/app_constants.dart';
+
+import 'medium_text.dart';
+
+class CustomTextField extends StatefulWidget {
+  const CustomTextField({
+    Key? key,
+    required this.controller,
+    required this.label,
+    this.maxLines = 1,
+    required this.hintText,
+    this.readOnly = false,
+    this.selection,
+    this.textInputType,
+  }) : super(key: key);
+  final TextEditingController controller;
+  final String label;
+  final int maxLines;
+  final String hintText;
+  final bool readOnly;
+  final bool? selection;
+  final TextInputType? textInputType;
+  // final Color? borderColor;
+
+  @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      keyboardType: widget.textInputType,
+      style: TextStyle(fontFamily: comorant),
+      readOnly: widget.readOnly,
+      enableInteractiveSelection: widget.selection,
+      cursorColor: Colors.white,
+      controller: widget.controller,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.black),
+          borderRadius: BorderRadius.all(
+            Radius.circular(5.sp),
+          ),
+        ),
+        focusColor: Colors.white,
+        fillColor: Colors.white,
+        hoverColor: Colors.white,
+        label: MediumText(
+          font: comorant,
+          text: widget.label,
+          color: Colors.white,
+        ),
+        hintText: widget.hintText,
+        hintTextDirection: TextDirection.ltr,
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.black),
+          borderRadius: BorderRadius.all(
+            Radius.circular(5.sp),
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.white),
+          borderRadius: BorderRadius.all(
+            Radius.circular(5.sp),
+          ),
+        ),
+      ),
+      validator: (val) {
+        if (val == null || val.isEmpty) {
+          return 'Enter ${widget.hintText}';
+        }
+        return null;
+      },
+      maxLines: widget.maxLines,
+    );
+  }
+}
+
+
+
+
+
+
+// class _CustomTextFieldState extends State<CustomTextField> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return TextFormField(
+//       readOnly: widget.readOnly,
+//       enableInteractiveSelection: widget.selection,
+//       cursorColor: const Color(AppConstants.taupe),
+//       controller: widget.controller,
+//       decoration: InputDecoration(
+//         border: const OutlineInputBorder(
+//           borderSide: BorderSide(color: Colors.black),
+//         ),
+//         focusColor: Colors.white,
+//         fillColor: Colors.white,
+//         hoverColor: Colors.white,
+//         label: Text(widget.label),
+//         hintText: widget.hintText,
+//         hintTextDirection: TextDirection.ltr,
+//         enabledBorder: const OutlineInputBorder(
+//           borderSide: BorderSide(color: Colors.white),
+//         ),
+//       ),
+//       validator: (val) {
+//         if (val == null || val.isEmpty) {
+//           return 'Enter your ${widget.hintText}';
+//         }
+//         return null;
+//       },
+//       maxLines: widget.maxLines,
+//       // onChanged: (text) => setState(() {}),
+//     );
+//   }
+// }

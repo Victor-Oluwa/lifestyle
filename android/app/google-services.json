@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "971329418583",
+    "project_id": "lifestyle-ar-app",
+    "storage_bucket": "lifestyle-ar-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:971329418583:android:f5013db2e446ad4fd03a12",
+        "android_client_info": {
+          "package_name": "com.example.lifestyle"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU5j8OD6exHExcMIoZYk317WZsT2W4k4o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

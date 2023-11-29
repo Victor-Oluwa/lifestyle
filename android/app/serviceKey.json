@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "lifestyle-ar-app",
+  "private_key_id": "46032c6f28bf6749b966f8f772d45dc6a90eae40",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDkflqVtMvb5UY8\nnJOCxyIExzjODrK9Ee9QULmO9T1jOxAh0rqrE7VTgfVXC+pT8xT8hVGk3KyHgXnR\nM5S1UF1D/ihaq+ygl2bdJnRBJ+CKPxEZp4DLVRcXTfYV4M2xhHp955N1+Wjxa9WX\nIThMfGSvQBZnus9jcRvBYxyB/ffFoWNAGMl4XLS9aYI+pPNGZIR5IRlNSwvWm7zP\nKXRFkD8/YHB9sM9nMWST9VIVxImTJ36oIsM/23eI30NJZv5I5fS64Ifc9vUtSFoP\n7MLwpOAoSuglM53uVDLvCej6smXEtMqbMS3LA3I7oZivadeCEdOUuHjQrAyO9kmo\ntTYSHh2hAgMBAAECggEAIdMen8jQNjDeUTywjYyNrv1lna4JVvnfs8OvecfjcDF0\ndZKsytneXt//LK/5NAzpD2oWUvx5QeSwiX/u71mtOifWsM2Aov6ms0LtCh7YG5Rd\nzgQWNIOCfpMDmeuEfQHqjCw1j8z9ybdikBPSh2gRaOwTelmU4oNXo4IuMdl3I2Hg\nJClCchWPObWgQp8pqzlJezm6apK+2aZ51p/FSyPL+C1vMeWbcv5w9rBZ81sqKHbm\nBtCM98ULz1eba324fgzlq61QY1GvPhGHoEnW+FnCgAoJPX6oI6DIyd2Rsjz7qumB\n6hUk+V87cnrypIs0AEjpP3li6yGDchQBJ7S9oZBUrQKBgQDzPSS3owsSuckP99gE\nDOiHBjaseOy97Acx00sfzlt1wxmUzPig9tWo1x6IZz4cOp3VERtb3dF6thpEw75T\nn5NHJuBYJAFZ9HKbRuAqhDLOKui6X4AA3P6p9fvB/uyBW2zp7lBTj8ELRmdBHgrO\n44AZLDX6BKBnOLmk9GuerEhSXwKBgQDweyv6GiL42zAXJWsXf7OvAzaNirDk2731\nO9dmrNlaOpRdfTVBqMkwS5yoUYQS6ve8qqwTGj9xDHwlOIQ58PZ4itGBdlIqq2EK\n6tJDl6zLaMYt0eCsy7fFwHr+V+z3I+C1S/cfLSwFlD6UD48YyCqnh/2U0RU1jcUl\nqE03E4+P/wKBgQCZwzwzziDQ3Jsquf1XSiWwPZBQZT0bLlq5950U5SlR/1xrgUtm\nzcLxMdP+XG2aAMAHkgHeiBHFZdqjP65QRJ8gqoXFkjU8fVf5qstIdTt8swldz8Mm\nSI3AOVzGHPW7LGVkWB91Q3nAO+hH9MrWUGCJCTax7zzLI8PPcCecLcKmNwKBgQC5\n5S0gn7WrE50AN3+qYaAfyOcR0UVfFHKqMMEY8MLwGdp4zoItqHElsT1/a8wh55rs\nMC7mcWLbW+BX0XF9bMTKd9zuK+3maCaTDuTNNWFwuCSCZPw99xiveFRbatKWVRiu\nbPOyGPQvt+IMCF8AtDMs4FXpBRtVE6tzqb9OtQNENwKBgE9qDzep4PnmKkqAhb57\nsx/9Am4XxFSk9Q9c/M/XmAPEQ3mbbcY403/2Wl5zrpQQcz1Tb1aRjXpubfPhdeyG\nu539ScdXm/xgNPF2cazfFs7vzvVlR0FFDrKMF/rTOUSfetQ0BPu3sqalxp7DAUen\n8eySyRoz6U7226Qco/nZMBzS\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-53p2q@lifestyle-ar-app.iam.gserviceaccount.com",
+  "client_id": "112817982585886480722",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-53p2q%40lifestyle-ar-app.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

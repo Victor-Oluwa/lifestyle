@@ -1,0 +1,72 @@
+firebase : File C:\Users\Project Admin\AppData\Roaming\npm\firebase.ps1 cannot be loaded because running scripts is disabled on this system. For more information, see about_Execution_Policies at https:/go.microsoft.com/fwlink/?LinkID=135170. At line:1 char:1 + firebase -V + ~~~~~~~~ + CategoryInfo : SecurityError: (:) [], PSSecurityException + FullyQualifiedErrorId : UnauthorizedAccess
+ANSWER
+It seems like you are encountering an issue with PowerShell's execution policy when trying to run the firebase command on your system. PowerShell restricts the execution of scripts by default to protect your system from unauthorized scripts that could potentially cause harm. In this case, the execution policy is preventing you from running the firebase.ps1 script.
+
+There are a few ways to resolve this issue. I'll outline the pros and cons of each method to help you decide which one is best suited for your situation.
+
+1. Bypass the execution policy for a single command
+You can bypass the execution policy for a single command by using the -ExecutionPolicy flag with the PowerShell command.
+
+PowerShell -ExecutionPolicy Bypass -Command "firebase -V"
+Pros:
+
+It doesn't require any permanent changes to your system's execution policy.
+It's a quick and easy solution for running a single command.
+Cons:
+
+You'll need to use this command every time you want to run a PowerShell script that's blocked by the execution policy.
+2. Change the execution policy for the current session
+You can change the execution policy for the current PowerShell session by running the following command:
+
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+Pros:
+
+It allows you to run scripts for the duration of the current PowerShell session without restrictions.
+It doesn't affect the system-wide execution policy.
+Cons:
+
+The execution policy reverts to its default setting when you close the PowerShell session.
+You need to run this command every time you open a new PowerShell session.
+3. Change the execution policy for the current user
+To change the execution policy for the current user, run the following command:
+
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+Pros:
+
+It allows you to run scripts without restrictions for your user account.
+It doesn't affect the system-wide execution policy.
+Cons:
+
+It only applies to the current user, so other users on the system will still have the default execution policy.
+It may expose your user account to security risks if you run malicious scripts.
+4. Change the execution policy for the entire system
+To change the execution policy for the entire system, run the following command as an administrator:
+
+Set-ExecutionPolicy -Scope LocalMachine -ExecutionPolicy RemoteSigned
+Pros:
+
+It allows all users on the system to run scripts without restrictions.
+Cons:
+
+It requires administrative privileges to change the system-wide execution policy.
+It may expose your system to security risks if users run malicious scripts.
+In most cases, changing the execution policy for the current user (option 3) or the current session (option 2) should suffice. However, if you need to run scripts frequently and don't want to change the execution policy every time, you might consider changing the execution policy for the entire system (option 4). Always be cautious when running scripts from unknown sources, as they may pose security risks.
+
+For more information on PowerShell execution policies, you can refer to the official Microsoft documentation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://fragile-ant-uniform.cyclic.app/
+ "nodemon": "^2.0.21"
+    "dev": "nodemon ./index.js"
