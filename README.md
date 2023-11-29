@@ -1,14 +1,53 @@
 # Flutter AR Furniture E-Commerce App
 
-Welcome to my Flutter-based Augmented Reality (AR) Furniture E-Commerce App! for furniture shopping. This mobile application seamlessly combines the worlds of furniture shopping and augmented reality to provide users with an immersive and interactive shopping experience.
+Welcome to my Flutter-based Augmented Reality (AR) Furniture E-Commerce App for furniture shopping. This mobile application seamlessly combines the worlds of furniture shopping and augmented reality to provide users with an immersive and interactive shopping experience.
 
 ## Key Features:
 
 - **Node.js Backend with MongoDB:**
-  - A robust and scalable backend built on Node.js, ensuring seamless communication with the MongoDB database for efficient data storage and retrieval.
+  - A robust and scalable backend built on Node.js, ensuring seamless communication with the MongoDB database for efficient data storage and retrieval. Follow the steps below to set up the backend.
+
+    ### Backend Setup:
+
+    1. **Install Node.js:**
+       - Make sure you have Node.js installed on your server. If not, download it [here](https://nodejs.org/).
+
+    2. **Install Dependencies:**
+       - Navigate to the `backend` directory:
+         ```bash
+         cd backend
+         ```
+       - Install dependencies:
+         ```bash
+         npm install
+         ```
+
+    3. **Configure MongoDB:**
+       - Set up a MongoDB database and update the connection string in `backend/config/db.config.js`.
+
+    4. **Run the Server:**
+       - Start the Node.js server:
+         ```bash
+         npm start
+         ```
 
 - **Firebase Push Notification:**
-  - Keep users engaged and informed with Firebase push notifications, delivering real-time updates and personalized messages.
+  - Keep users engaged and informed with Firebase push notifications, delivering real-time updates and personalized messages. Follow the steps below to configure Firebase.
+
+    ### Firebase Configuration:
+
+    1. **Create a Firebase Project:**
+       - Go to the [Firebase Console](https://console.firebase.google.com/).
+       - Click on "Add Project" and follow the prompts to create a new Firebase project.
+
+    2. **Add Firebase to Your App:**
+       - For Android:
+         - Download `google-services.json` and place it in `android/app/`.
+       - For iOS:
+         - Download `GoogleService-Info.plist` and place it in `ios/Runner/`.
+
+    3. **Enable Firebase Services:**
+       - Enable services such as Authentication, Cloud Firestore, and Cloud Messaging in the Firebase Console.
 
 - **Augmented Reality Furniture View (Under Development):**
   - Experience the future of furniture shopping with our AR feature, allowing users to visualize furniture in their own space before making a purchase.
@@ -56,16 +95,12 @@ Welcome to my Flutter-based Augmented Reality (AR) Furniture E-Commerce App! for
    ```
 
 2. **Setup Backend:**
-   - Navigate to the `backend` directory and follow the instructions in the README to set up the Node.js backend with MongoDB.
+   - Follow the backend setup instructions above.
 
 3. **Configure Firebase:**
-   - Follow the setup guide in the README to configure Firebase for push notifications.
+   - Follow the Firebase configuration instructions above.
 
 4. **Run the App:**
    - Open the project in Flutter and run the app on your preferred device or emulator.
 
 Feel free to explore, contribute, and make this AR Furniture E-Commerce App even more amazing!
-
----
-
-Adjust the details as needed for your specific project and preferences.
