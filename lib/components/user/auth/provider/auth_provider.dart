@@ -6,7 +6,7 @@ import '../../../../state/providers/actions/provider_operations.dart';
 
 // final authFunctionProvider = Provider((ref) => AuthFunctions(ref));
 
-final authFunctionProvider = Provider.family((ref, BuildContext context) {
+final authFunctionsProvider = Provider.family((ref, BuildContext context) {
   return AuthFunction(ref: ref, chiefContext: context);
 });
 

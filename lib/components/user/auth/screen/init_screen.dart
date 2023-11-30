@@ -17,7 +17,7 @@ class InitScreen extends ConsumerStatefulWidget {
 class _InitScreenState extends ConsumerState<InitScreen> {
   @override
   void didChangeDependencies() {
-    final authFunction = ref.watch(authFunctionProvider(context));
+    final authFunction = ref.watch(authFunctionsProvider(context));
 
     authFunction.checkConnection().then((isConnected) {
       authFunction.shouldShowDialog.call(

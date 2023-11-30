@@ -1,10 +1,12 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:lifestyle/Common/colors/lifestyle_colors.dart';
 import 'package:lifestyle/Common/fonts/lifestyle_fonts.dart';
 
 class MediumText extends StatelessWidget {
   const MediumText({
-    super.key,
+    Key? key,
     required this.text,
     this.color = LifestyleColors.kTaupeDarkened,
     this.size = 15,
@@ -12,7 +14,8 @@ class MediumText extends StatelessWidget {
     this.font = LifestyleFonts.kComorantMedium,
     this.align = TextAlign.justify,
     this.overflow = TextOverflow.ellipsis,
-  });
+    this.decoration,
+  }) : super(key: key);
   final String text;
   final Color color;
   final double size;
@@ -20,20 +23,16 @@ class MediumText extends StatelessWidget {
   final String? font;
   final TextAlign? align;
   final TextOverflow? overflow;
+  final TextDecoration? decoration;
   @override
   Widget build(BuildContext context) {
     return Text(
-      // maxLines: 6,
-      //  overflow: TextOverflow.ellipsis,
       textAlign: align,
-      // selectionColor: Colors.grey,
       text,
       maxLines: maxLine,
       style: TextStyle(
-          // letterSpacing: 5.0,
-          // wordSpacing: 1.5,
-          // textBaseline: TextBaseline.alphabetic,
-          // height: 0.9,
+          decoration: decoration,
+          decorationColor: LifestyleColors.kTaupeDarkened,
           overflow: overflow,
           color: color,
           fontSize: size,

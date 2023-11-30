@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lifestyle/Common/colors/lifestyle_colors.dart';
 
+import '../../../../Common/strings/strings.dart';
 import '../screens/privacy_policy.dart';
 
 class DocumentsPageDropdown extends StatefulWidget {
@@ -21,7 +22,8 @@ class _DocumentsPageDropdownState extends State<DocumentsPageDropdown> {
         color: LifestyleColors.kTaupeDarkened,
         onSelected: (String result) {
           if (result == 'Policy') {
-            Get.to(const PrivacyPolicy());
+            Get.to(() => const PrivacyPolicy(),
+                arguments: privacyPolicyAssetPath);
           }
           log('Selected: $result');
         },

@@ -52,7 +52,7 @@ class ProfileServices {
       final secureStorage = ref.read(secureStorageProvider);
 
       await secureStorage.deleteSecureData(AppConstants.authToken);
-      Get.offAll(() => const AuthSignInScreen());
+      Get.offAll(() => const LoginScreen());
     } catch (e) {
       dropperMessage('ATTENTION', 'An error occurred. Please try again later');
       log('Failed to logOut: $e');

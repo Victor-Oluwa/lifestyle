@@ -7,13 +7,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
 import '../../../../Common/colors/lifestyle_colors.dart';
+import '../../../../core/typeDef/type_def.dart';
 import '../../../../state/providers/actions/provider_operations.dart';
 import '../../../../state/providers/provider_model/user_provider.dart';
 import '../../../admin/admin-tab/admin_tab.dart';
 import '../../home/screens/tab_page.dart';
 import '../provider/auth_provider.dart';
 import '../screen/login.dart';
-import '../screen/register.dart';
+import '../screen/signup.dart';
 
 class AuthFunction {
   AuthFunction({required this.chiefContext, required this.ref});
@@ -64,7 +65,7 @@ class AuthFunction {
       log('User status: $userStatus');
 
       if (userStatus.containsKey('off')) {
-        Get.offAll(const AuthSignInScreen());
+        Get.offAll(const LoginScreen());
       } else {
         switch (user.type) {
           case 'user':
@@ -78,7 +79,7 @@ class AuthFunction {
             break;
           default:
             log('User Type: ${user.type}');
-            Get.offAll(() => const AuthScreen());
+            Get.offAll(() => const SignUpScreen());
         }
       }
     } catch (e) {
@@ -93,5 +94,23 @@ class AuthFunction {
 
   Future<Map<String, dynamic>> authenticateUser() async {
     return await ref.watch(getUserDataProvider.future);
+  }
+
+  void signUpUser({
+    required TEC emailController,
+    required TEC passwordController,
+    required TEC nameController,
+  }) async {
+    final authServices = ref.read(authServiceProvider);
+    await authServices
+        .signUpUser(
+          email: emailController.text,
+          password: passwordController.text,
+          name: nameController.text,
+        )
+        .then(
+          (value) async =>
+              await ref.read(notificationFunctionProvider).uploadFcmToken(),
+        );
   }
 }

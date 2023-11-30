@@ -17,7 +17,7 @@ import 'package:lifestyle/components/admin/update-products/screen/update_product
 import 'package:lifestyle/components/admin/order-details/screen/order_details_screen.dart';
 import '../components/user/ar/screen/ar_view.dart';
 import '../components/user/auth/screen/login.dart';
-import '../components/user/auth/screen/register.dart';
+import '../components/user/auth/screen/signup.dart';
 import '../components/user/search/screen/search_screen.dart';
 import 'lifestyle_routes_names.dart';
 
@@ -34,12 +34,12 @@ List<GetPage> getPages = [
   ),
   GetPage(
       name: LifestyleRouteName.signUpRoute,
-      page: () => const AuthScreen(),
+      page: () => const SignUpScreen(),
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)),
   GetPage(
       name: LifestyleRouteName.signInRoute,
-      page: () => const AuthSignInScreen(),
+      page: () => const LoginScreen(),
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)),
   GetPage(

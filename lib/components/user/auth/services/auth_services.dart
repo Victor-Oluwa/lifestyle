@@ -86,7 +86,6 @@ class AuthServices {
 
   // Sign Up
   Future<void> signUpUser({
-    required BuildContext context,
     required String email,
     required String password,
     required name,
@@ -113,7 +112,7 @@ class AuthServices {
         body: newUser.toJson(),
       );
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
+      if (response.statusCode == 200) {
         final userNotifier = ref.read(userProvider.notifier);
         userNotifier.updateUserFromMap(user: jsonDecode(response.body));
 
