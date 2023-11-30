@@ -1,7 +1,7 @@
 import 'package:flutter/Material.dart';
 
 //URLs
-String uri = 'http://192.168.61.1:3000';
+String uri = 'http://192.168.180.1:3000';
 String payStackInitUrl = 'https://api.paystack.co/transaction/initialize';
 
 const kBrochureUrl =

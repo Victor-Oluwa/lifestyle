@@ -9,6 +9,8 @@ import '../../../../Common/colors/lifestyle_colors.dart';
 import '../../../../Common/fonts/lifestyle_fonts.dart';
 import '../../../../Common/widgets/medium_text.dart';
 import '../../../../models-classes/user.dart';
+import '../../../../state/providers/actions/provider_operations.dart';
+import '../../home/widgets/cart_badge_widget.dart';
 import '../function/profile_functions.dart';
 
 class UserImageAndSideIconWidget extends ConsumerWidget {
@@ -28,14 +30,29 @@ class UserImageAndSideIconWidget extends ConsumerWidget {
       child: Center(
         child: Stack(
           children: [
-            buildUserContainer(),
+            buildUserImageContainer(),
             buildLogoutButton(),
             buildProfilePictureButton(),
             buildEditButton(ref: ref, context: context),
-            buildSwitchToAdminButton(user)
+            buildCartButton(ref),
+            buildSwitchToAdminButton(user),
           ],
         ),
       ),
+    );
+  }
+
+  Widget buildCartButton(WidgetRef ref) {
+    return Positioned(
+      right: 1.8.w,
+      top: 2.h,
+      child: GestureDetector(
+          onTap: () => ref.read(homeFunctionProvider).navigateToCartScreen(),
+          child: CartBadgeWidget(
+            user: user,
+            ref: ref,
+            iconData: Icons.shopping_cart_checkout_sharp,
+          )),
     );
   }
 
@@ -43,7 +60,7 @@ class UserImageAndSideIconWidget extends ConsumerWidget {
     return user.type == 'admin'
         ? Positioned(
             right: 1.8.w,
-            top: 20.h,
+            top: 25.h,
             child: InkWell(
               onTap: () {
                 Get.offAll(() => const AdminTab());
@@ -57,7 +74,7 @@ class UserImageAndSideIconWidget extends ConsumerWidget {
         : const Text('');
   }
 
-  Widget buildUserContainer() {
+  Widget buildUserImageContainer() {
     return Container(
       padding: EdgeInsets.only(right: 10.w),
       decoration: const BoxDecoration(
@@ -141,7 +158,7 @@ class UserImageAndSideIconWidget extends ConsumerWidget {
   Widget buildLogoutButton() {
     return Positioned(
       right: 1.8.w,
-      top: 2.h,
+      top: 20.h,
       child: InkWell(
         onTap: () {
           profileFunctions.logOut();

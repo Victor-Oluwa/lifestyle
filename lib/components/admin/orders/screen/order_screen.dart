@@ -32,7 +32,6 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen>
     final orderFunction = ref.read(orderFunctionsProvider);
     return Scaffold(
       backgroundColor: lightTaupe,
-      //Appbar
       appBar: AppBar(
         title: MediumText(
           font: comorant,
@@ -43,7 +42,6 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen>
         backgroundColor: Colors.black,
         elevation: 0,
       ),
-      //Body
       body: SafeArea(
           child: Column(
         children: [

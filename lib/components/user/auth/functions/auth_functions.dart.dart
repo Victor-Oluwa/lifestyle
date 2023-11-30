@@ -117,6 +117,7 @@ class AuthFunction {
   Future<void> signInUser(
       {required TEC emailController, required TEC passwordController}) async {
     final authServices = ref.read(authServiceProvider);
+    log('Passed password: ${passwordController.text}');
     await authServices
         .signInUser(
           email: emailController.text,

@@ -247,7 +247,6 @@ class _AuthScreenState extends ConsumerState<SignUpScreen> {
         if (value!.isEmpty) {
           return 'Please enter a password';
         }
-        _passwordController.clear();
         return null;
       },
     );

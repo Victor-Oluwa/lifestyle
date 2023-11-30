@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle/common/widgets/medium_text.dart';
@@ -77,7 +76,11 @@ class _HomePageState extends ConsumerState<HomePage>
           GestureDetector(
               onTap: () =>
                   ref.read(homeFunctionProvider).navigateToCartScreen(),
-              child: CartBadgeWidget(user: user, ref: ref)),
+              child: CartBadgeWidget(
+                user: user,
+                ref: ref,
+                iconData: Icons.notifications,
+              )),
         ],
       ),
     );

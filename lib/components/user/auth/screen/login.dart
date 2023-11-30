@@ -6,8 +6,6 @@ import 'package:lifestyle/Common/widgets/app_constants.dart';
 import 'package:lifestyle/Common/widgets/floating_text_editor.dart';
 import 'package:lifestyle/components/user/auth/provider/auth_provider.dart';
 import 'package:lifestyle/components/user/auth/screen/signup.dart';
-import 'package:lifestyle/state/providers/actions/provider_operations.dart';
-import 'package:lifestyle/routes-management/lifestyle_routes_names.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../../../common/widgets/medium_text.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

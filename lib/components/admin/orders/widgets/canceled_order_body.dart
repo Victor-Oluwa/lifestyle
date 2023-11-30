@@ -21,58 +21,58 @@ class CanceledOrderBody extends StatelessWidget {
     final user = ref.watch(userProvider);
 
     return ref.watch(getFailedOrdersFutureProvider).when(
-        data: (List<Order> order) {
+        data: (List<Order> data) {
+      final order = data.reversed.toList();
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: ListView.builder(
               itemCount: order.length,
+              primary: true,
               itemBuilder: (context, index) {
-                return Container(
-                  color: Colors.white,
-                  width: 80.w,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Stack(
-                        // alignment: Alignment.topRight,
-                        children: [
-                          Container(
-                            height: 15.h,
-                            width: 15.h,
-                            margin: EdgeInsets.only(left: 4.w, bottom: 2.h),
-                            decoration: BoxDecoration(
-                              color: LifestyleColors.kTaupeDarkened,
-                              borderRadius: BorderRadius.circular(
-                                5.sp,
-                              ),
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: CachedNetworkImageProvider(
-                                    // orderss![index].products[index].images[0],
-                                    order[index].products[0].images[0]),
-                              ),
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Stack(
+                      // alignment: Alignment.topRight,
+                      children: [
+                        Container(
+                          height: 15.h,
+                          width: 15.h,
+                          margin: EdgeInsets.only(left: 4.w, bottom: 2.h),
+                          decoration: BoxDecoration(
+                            color: LifestyleColors.kTaupeDarkened,
+                            borderRadius: BorderRadius.circular(
+                              5.sp,
+                            ),
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: CachedNetworkImageProvider(
+                                  // orderss![index].products[index].images[0],
+                                  order[index].products[0].images[0]),
                             ),
                           ),
-                          Positioned(
-                            top: 1.h,
-                            left: 19,
-                            child: Container(
-                              padding: EdgeInsets.all(2.w),
-                              decoration:
-                                  const BoxDecoration(color: Colors.black),
-                              child: MediumText(
-                                text: 'Canceled',
-                                color: Colors.amber.shade800,
-                              ),
+                        ),
+                        Positioned(
+                          top: 1.h,
+                          left: 19,
+                          child: Container(
+                            padding: EdgeInsets.all(2.w),
+                            decoration: const BoxDecoration(
+                                color: LifestyleColors.transparent),
+                            child: MediumText(
+                              text: 'Canceled',
+                              color: LifestyleColors.kTaupeBackground,
                             ),
                           ),
-                        ],
-                      ),
-                      SizedBox(width: 2.w),
-                      Container(
+                        ),
+                      ],
+                    ),
+                    SizedBox(width: 2.w),
+                    Expanded(
+                      child: Container(
                         alignment: Alignment.center,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,6 +86,7 @@ class CanceledOrderBody extends StatelessWidget {
                                   : 'Name: ${order[index].customerName}',
                             ),
                             MediumText(
+                              overflow: TextOverflow.ellipsis,
                               color: LifestyleColors.kTaupeDarkened,
                               size: 15.sp,
                               text: 'Id: ${order[index].id}',
@@ -108,8 +109,8 @@ class CanceledOrderBody extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 );
               },
             ),
