@@ -34,7 +34,6 @@ class AuthServices {
   final Dio _dio = Dio();
 
   Future<void> signInUser({
-    required BuildContext context,
     required String email,
     required String password,
   }) async {

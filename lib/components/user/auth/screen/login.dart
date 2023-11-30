@@ -4,6 +4,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lifestyle/Common/colors/lifestyle_colors.dart';
 import 'package:lifestyle/Common/widgets/app_constants.dart';
 import 'package:lifestyle/Common/widgets/floating_text_editor.dart';
+import 'package:lifestyle/components/user/auth/provider/auth_provider.dart';
 import 'package:lifestyle/components/user/auth/screen/signup.dart';
 import 'package:lifestyle/state/providers/actions/provider_operations.dart';
 import 'package:lifestyle/routes-management/lifestyle_routes_names.dart';
@@ -54,17 +55,10 @@ class _AuthSignInScreenState extends ConsumerState<LoginScreen> {
   }
 
   Future<void> signInUser() async {
-    final authServices = ref.read(authServiceProvider);
-    await authServices
-        .signInUser(
-          context: context,
-          email: _emailController.text,
-          password: _passwordController.text,
-        )
-        .then(
-          (value) async =>
-              await ref.read(notificationFunctionProvider).uploadFcmToken(),
-        );
+    final authFunctions = ref.read(authFunctionsProvider(context));
+    await authFunctions.signInUser(
+        emailController: _emailController,
+        passwordController: _passwordController);
   }
 
   @override

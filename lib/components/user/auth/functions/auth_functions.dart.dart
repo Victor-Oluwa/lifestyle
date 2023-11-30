@@ -113,4 +113,18 @@ class AuthFunction {
               await ref.read(notificationFunctionProvider).uploadFcmToken(),
         );
   }
+
+  Future<void> signInUser(
+      {required TEC emailController, required TEC passwordController}) async {
+    final authServices = ref.read(authServiceProvider);
+    await authServices
+        .signInUser(
+          email: emailController.text,
+          password: passwordController.text,
+        )
+        .then(
+          (value) async =>
+              await ref.read(notificationFunctionProvider).uploadFcmToken(),
+        );
+  }
 }
