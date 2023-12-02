@@ -36,7 +36,7 @@ class PaystackFunctions {
     required BuildContext context,
     VoidCallback? onSuccess,
   }) async {
-    ref.read(cartIsProcessingProvider.notifier).state = true;
+    ref.read(isProcessingProvider.notifier).state = true;
     final user = ref.read(userProvider);
     if (user.address.isEmpty || user.phone.isEmpty) {
       snack.showBottomSnackBar(
@@ -56,7 +56,7 @@ class PaystackFunctions {
             context: context,
             onSuccess: onSuccess);
       } else {
-        ref.invalidate(cartIsProcessingProvider);
+        ref.invalidate(isProcessingProvider);
         log('Indicator invalidated (Order)');
       }
     });
@@ -101,10 +101,10 @@ class PaystackFunctions {
                 onSuccess: onSuccess,
                 orderId: orderId);
           }
-          ref.invalidate(cartIsProcessingProvider);
+          ref.invalidate(isProcessingProvider);
         } else {
           log('InitializePayment returned empty map');
-          ref.invalidate(cartIsProcessingProvider);
+          ref.invalidate(isProcessingProvider);
         }
       });
     }
@@ -146,7 +146,7 @@ class PaystackFunctions {
             orderId: orderId,
           );
         } else {
-          ref.invalidate(cartIsProcessingProvider);
+          ref.invalidate(isProcessingProvider);
         }
       });
     } else {

@@ -17,10 +17,11 @@ class OrderCostBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: Alignment.topLeft,
       padding: EdgeInsets.all(1.h),
       height: 15.h,
       width: 85.w,
-      decoration: const BoxDecoration(color: LifestyleColors.kTaupeDarkened),
+      decoration: const BoxDecoration(color: LifestyleColors.kTaupeDark),
       child: Column(
         children: [
           Row(

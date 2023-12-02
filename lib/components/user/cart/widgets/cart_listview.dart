@@ -8,12 +8,10 @@ class CartListView extends StatelessWidget {
   const CartListView({
     super.key,
     required this.cart,
-    required this.cartFunction,
     required this.ref,
   });
   final WidgetRef ref;
   final List<Cart> cart;
-  final CartFunctions cartFunction;
 
   @override
   Widget build(BuildContext context) {

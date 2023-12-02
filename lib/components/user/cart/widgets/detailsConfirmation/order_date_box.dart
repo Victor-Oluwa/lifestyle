@@ -22,7 +22,7 @@ class OrderDateBox extends StatelessWidget {
       width: 85.w,
       padding: EdgeInsets.all(1.h),
       alignment: Alignment.topLeft,
-      decoration: const BoxDecoration(color: LifestyleColors.kTaupeDarkened),
+      decoration: const BoxDecoration(color: LifestyleColors.kTaupeDark),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

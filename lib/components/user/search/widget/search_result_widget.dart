@@ -19,32 +19,25 @@ class SearchResultWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints.expand(),
-      decoration: const BoxDecoration(),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 2.h,
-          ),
-          Expanded(
-            child: ListView.builder(
-                itemCount: data.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      ref
-                          .read(searchFunctionProvider)
-                          .navigateToProductDetailsScreen(data[index]);
-                    },
-                    child: SearchedResultTemplate(
-                      product: data[index],
-                    ),
-                  );
-                }),
-          )
-        ],
-      ),
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+              itemCount: data.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    ref
+                        .read(searchFunctionProvider)
+                        .navigateToProductDetailsScreen(data[index]);
+                  },
+                  child: SearchedResultTemplate(
+                    product: data[index],
+                  ),
+                );
+              }),
+        )
+      ],
     );
   }
 }

@@ -11,8 +11,9 @@ import 'package:lifestyle/models-classes/product.dart';
 
 import '../../../../Common/fonts/lifestyle_fonts.dart';
 import '../../../../common/widgets/medium_text.dart';
+import '../../../../state/providers/actions/provider_operations.dart';
 
-class QuantityPicker extends StatelessWidget {
+class QuantityPicker extends ConsumerWidget {
   const QuantityPicker({
     Key? key,
     required this.product,
@@ -26,13 +27,19 @@ class QuantityPicker extends StatelessWidget {
   final WidgetRef ref;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     int currentValue = 0;
 
     return StatefulBuilder(builder: (context, setState) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          IconButton(
+              onPressed: () {
+                ref.invalidate(isProcessingProvider);
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.cancel)),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

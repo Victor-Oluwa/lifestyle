@@ -43,19 +43,19 @@ class _CartItemState extends ConsumerState<CartItemWidget> {
     final quantity = widget.cart.quantity;
     return Column(
       children: [
-        buildCart(product, cartFunctions, quantity),
+        buildItemWidget(product, cartFunctions, quantity),
       ],
     );
   }
 
-  Container buildCart(
+  Container buildItemWidget(
     Product product,
     CartFunctions cartFunction,
     quantity,
   ) {
     return Container(
       padding: EdgeInsets.only(left: 3.w, top: 1.h, bottom: 1.h),
-      color: LifestyleColors.kTaupeDarkened,
+      color: LifestyleColors.kTaupeDark,
       margin: EdgeInsets.symmetric(horizontal: 2.5.h, vertical: 2.5.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -144,15 +144,16 @@ class _CartItemState extends ConsumerState<CartItemWidget> {
       required int quantity}) {
     return InkWell(
       onTap: () {
-        final internet = ref.read(isConnected);
-        log('There is onternet ooooo: $internet');
+        ref.read(isProcessingProvider.notifier).state = true;
 
+        final internet = ref.read(isConnected);
         internet == true
             ? ref
                 .watch(cartFunctionProvider)
                 .getProductQuantity(product.id)
                 .then((maxValue) {
                 showDialog(
+                    barrierDismissible: false,
                     barrierColor: LifestyleColors.black.withOpacity(0.8),
                     context: widget.context,
                     builder: (context) {

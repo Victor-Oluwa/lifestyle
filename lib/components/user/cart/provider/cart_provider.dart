@@ -12,5 +12,3 @@ final productQuantityState =
   final cartServices = ref.watch(cartFunctionProvider);
   return await cartServices.getProductQuantity(productId);
 });
-
-final cartIsProcessingProvider = StateProvider((ref) => false);

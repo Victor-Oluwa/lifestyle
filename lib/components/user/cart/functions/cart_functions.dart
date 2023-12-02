@@ -52,6 +52,7 @@ class CartFunctions {
   }
 
   void deleteCartItem(Product product) {
+    ref.read(isProcessingProvider.notifier).state = true;
     final cartServices = ref.read(cartServicesProvider);
     cartServices.deleteFromCart(product: product);
   }
@@ -132,22 +133,17 @@ class CartFunctions {
         case true:
           return const EmptyScreenWidget();
         case false:
-          return Container(
-            constraints: const BoxConstraints.expand(),
-            decoration: const BoxDecoration(),
-            child: Column(
-              children: [
-                const TotalPriceBar(),
-                CartListView(
-                  cart: cart,
-                  cartFunction: cartFunction,
-                  ref: ref,
-                ),
-                CartProceedButton(
-                  cartFunctions: cartFunction,
-                ),
-              ],
-            ),
+          return Column(
+            children: [
+              const TotalPriceBar(),
+              CartListView(
+                cart: cart,
+                ref: ref,
+              ),
+              CartProceedButton(
+                cartFunctions: cartFunction,
+              ),
+            ],
           );
         default:
           return const EmptyScreenWidget();

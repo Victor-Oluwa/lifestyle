@@ -6,6 +6,7 @@ import 'package:lifestyle/Common/widgets/app_constants.dart';
 import 'package:lifestyle/Common/widgets/medium_text.dart';
 
 import '../../../../Common/colors/lifestyle_colors.dart';
+import '../../../../Common/widgets/processing_indicator.dart';
 
 class CartViewScreen extends ConsumerStatefulWidget {
   const CartViewScreen({super.key});
@@ -33,6 +34,7 @@ class _CartViewScreen extends ConsumerState<CartViewScreen>
     final cartFunction = ref.read(cartFunctionProvider);
     cartFunction.syncUserCart();
     super.didChangeDependencies();
+    ref.invalidate(isProcessingProvider);
   }
 
   @override
@@ -46,22 +48,27 @@ class _CartViewScreen extends ConsumerState<CartViewScreen>
   Widget build(BuildContext context) {
     final cartFunction = ref.watch(cartFunctionProvider);
     final cart = cartFunction.getUserCartObject();
+    final isProcessing = ref.watch(isProcessingProvider);
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.black,
-          title: MediumText(
-            font: comorant,
-            text: 'My Cart',
-            color: Colors.white,
-            size: 18.sp,
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.black,
+            title: MediumText(
+              font: comorant,
+              text: 'My Cart',
+              color: Colors.white,
+              size: 18.sp,
+            ),
           ),
-        ),
-        backgroundColor: LifestyleColors.kTaupeBackground,
-        body: cartFunction.buildCartView(
-            cart: cart, cartFunction: cartFunction, ref: ref),
-      ),
+          backgroundColor: LifestyleColors.kTaupeBackground,
+          body: Stack(
+            children: [
+              cartFunction.buildCartView(
+                  cart: cart, cartFunction: cartFunction, ref: ref),
+              isProcessing ? const ProcessingIndicator() : const Text('')
+            ],
+          )),
     );
   }
 }

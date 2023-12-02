@@ -84,51 +84,58 @@ class _AuthScreenState extends ConsumerState<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFFB0A291),
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                buildSignUpText(),
-                buildSignUpForm(),
-                SizedBox(
-                  height: 5.h,
+        child: Container(
+          constraints: const BoxConstraints.expand(),
+          child: Stack(
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    buildSignUpText(),
+                    buildSignUpForm(),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    buildSignUpButton(),
+                    IconButton(
+                        onPressed: () {
+                          x.Get.to(() => const PrivacyPolicy(),
+                              arguments: privacyPolicyAssetPath);
+                        },
+                        icon: const MediumText(
+                            decoration: TextDecoration.underline,
+                            text: 'Terms and Privacy Policy'))
+                  ],
                 ),
-                buildSignUpButton(),
-                IconButton(
-                    onPressed: () {
-                      x.Get.to(() => const PrivacyPolicy(),
-                          arguments: privacyPolicyAssetPath);
-                    },
-                    icon: const MediumText(
-                        decoration: TextDecoration.underline,
-                        text: 'Terms and Privacy Policy'))
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                MediumText(
-                  font: comorant,
-                  text: 'Already have an account? ',
-                  color: LifestyleColors.white,
+              ),
+              Positioned(
+                bottom: 0.h,
+                left: 25.w,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    MediumText(
+                      font: comorant,
+                      text: 'Already have an account? ',
+                      color: LifestyleColors.white,
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        x.Get.offAll(() => const LoginScreen());
+                      },
+                      icon: const MediumText(
+                        text: 'Sign in',
+                        color: LifestyleColors.kTaupeDarkened,
+                      ),
+                    ),
+                  ],
                 ),
-                IconButton(
-                  onPressed: () {
-                    x.Get.offAll(() => const LoginScreen());
-                  },
-                  icon: const MediumText(
-                    text: 'Sign in',
-                    color: LifestyleColors.kTaupeDarkened,
-                  ),
-                ),
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );

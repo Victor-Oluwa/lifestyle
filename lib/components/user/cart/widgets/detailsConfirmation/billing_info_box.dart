@@ -23,8 +23,9 @@ class BillingInfoBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(1.h),
+      alignment: Alignment.topLeft,
       width: 85.w,
-      decoration: const BoxDecoration(color: LifestyleColors.kTaupeDarkened),
+      decoration: const BoxDecoration(color: LifestyleColors.kTaupeDark),
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,

@@ -8,7 +8,7 @@ import 'package:lifestyle/models-classes/order.dart';
 import 'package:lifestyle/components/admin/order-details/function/order_details_function.dart';
 import 'package:get/get.dart' as x;
 import 'package:lifestyle/components/admin/orders/widgets/general_order_details.dart';
-import 'package:lifestyle/components/admin/orders/widgets/order_item_detail.dart';
+import 'package:lifestyle/components/admin/orders/widgets/items_in_order.dart';
 import 'package:lifestyle/components/admin/order-details/widgets/order_tracker.dart';
 import 'package:lifestyle/state/providers/actions/provider_operations.dart';
 import 'package:lifestyle/state/providers/provider_model/user_provider.dart';
@@ -90,6 +90,9 @@ class _OrderDetailsScreenState extends ConsumerState<OrderDetailsScreen> {
                     color: LifestyleColors.kTaupeDarkened,
                     size: 16.sp,
                   ),
+                  SizedBox(
+                    height: 1.h,
+                  ),
                   Container(
                     width: double.infinity,
                     padding: EdgeInsets.all(1.h),
@@ -102,13 +105,16 @@ class _OrderDetailsScreenState extends ConsumerState<OrderDetailsScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        MediumText(text: 'Buyer Name: ${order.customerName}'),
+                        MediumText(text: 'User Name: ${order.customerName}'),
                         MediumText(text: 'Phone: ${user.phone}'),
                         MediumText(
                             overflow: TextOverflow.visible,
                             text: 'Address: ${order.address}'),
                       ],
                     ),
+                  ),
+                  SizedBox(
+                    height: 5.h,
                   ),
                   MediumText(
                     font: LifestyleFonts.kCeraMedium,
@@ -119,7 +125,7 @@ class _OrderDetailsScreenState extends ConsumerState<OrderDetailsScreen> {
                   SizedBox(
                     height: 1.h,
                   ),
-                  OrderItemDetails(
+                  ItemsInOrder(
                     order: order,
                     cartFunction: cartFunctions,
                   ),

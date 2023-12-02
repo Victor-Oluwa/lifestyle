@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart' as x;
 import 'package:lifestyle/Common/colors/lifestyle_colors.dart';
+import 'package:lifestyle/Common/widgets/loading_indicator.dart';
+import 'package:lifestyle/Common/widgets/processing_indicator.dart';
 
 import 'package:lifestyle/state/providers/actions/provider_operations.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -39,14 +41,19 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final serchFunction = ref.read(searchFunctionProvider);
+    final isProcessing = ref.watch(isProcessingProvider);
     final query = ref.watch(queryProvider);
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: buildAppbar(),
-      backgroundColor: const Color(0xFFB0A291),
-      body: serchFunction.buildSearchView(
-          ref: ref, query: query, controller: controller),
-    );
+        resizeToAvoidBottomInset: false,
+        appBar: buildAppbar(),
+        backgroundColor: const Color(0xFFB0A291),
+        body: Stack(
+          children: [
+            serchFunction.buildSearchView(
+                ref: ref, query: query, controller: controller),
+            isProcessing ? const ProcessingIndicator() : const Text(''),
+          ],
+        ));
   }
 
   AppBar buildAppbar() {

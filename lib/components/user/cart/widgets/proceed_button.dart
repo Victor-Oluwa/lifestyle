@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/Material.dart';
+import 'package:lifestyle/Common/colors/lifestyle_colors.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:lifestyle/Common/widgets/app_constants.dart';
@@ -15,40 +16,23 @@ class CartProceedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () {
+    return GestureDetector(
+      onTap: () {
         cartFunctions.navigateToOrderDetailsScreen();
       },
-      icon: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.black,
-              ),
-              alignment: Alignment.center,
-              height: 7.h,
-              child: Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-                spacing: 2.w,
-                children: [
-                  MediumText(
-                    font: comorant,
-                    text: 'Proceed'.toUpperCase(),
-                    size: 18.sp,
-                    color: const Color(0xFFB0A291),
-                  ),
-                  Icon(
-                    Icons.arrow_right,
-                    size: 25.sp,
-                    color: const Color(0xFFB0A291),
-                  )
-                ],
-              ),
-            ),
-          )
-        ],
+      child: Container(
+        // margin: EdgeInsets.symmetric(horizontal: 3.w),
+        decoration: const BoxDecoration(
+          color: LifestyleColors.black,
+        ),
+        alignment: Alignment.center,
+        height: 7.h,
+        child: MediumText(
+          font: comorant,
+          text: 'PROCEED',
+          size: 18.sp,
+          color: LifestyleColors.white,
+        ),
       ),
     );
   }

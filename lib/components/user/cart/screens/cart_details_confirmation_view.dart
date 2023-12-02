@@ -49,7 +49,7 @@ class _CartDetailsConfirmationState
     extends ConsumerState<CartDetailsConfirmation> {
   @override
   void didChangeDependencies() {
-    ref.invalidate(cartIsProcessingProvider);
+    ref.invalidate(isProcessingProvider);
     super.didChangeDependencies();
   }
 
@@ -57,7 +57,7 @@ class _CartDetailsConfirmationState
   Widget build(BuildContext context) {
     final paystackFunction = ref.watch(paystackFunctionsProvider);
     final user = ref.watch(userProvider);
-    final bool isProcessing = ref.watch(cartIsProcessingProvider);
+    final bool isProcessing = ref.watch(isProcessingProvider);
 
     paystackFunction.startPaystark();
     final cartFunction = ProviderReference.cartFunction(ref: ref);
@@ -67,7 +67,6 @@ class _CartDetailsConfirmationState
       backgroundColor: LifestyleColors.kTaupeBackground,
       appBar: AppBar(
         backgroundColor: LifestyleColors.black,
-        centerTitle: true,
         title: MediumText(
           color: Colors.white,
           size: 20.sp,
@@ -85,8 +84,8 @@ class _CartDetailsConfirmationState
                     child: Container(
                       height: double.infinity,
                       // decoration: const BoxDecoration(color: Colors.black26),
-                      // padding: EdgeInsets.only(top: 4.h),
-                      margin: EdgeInsets.only(top: 4.5.h),
+                      padding: EdgeInsets.only(top: 1.h),
+
                       child: SingleChildScrollView(
                         child: Column(
                           children: [

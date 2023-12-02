@@ -52,6 +52,7 @@ class CartServices {
     } catch (e) {
       log('Failed to update cart quantity: $e');
     }
+    ref.invalidate(isProcessingProvider);
   }
 
   void minusCartQuantity({
@@ -115,6 +116,7 @@ class CartServices {
     } catch (e) {
       log(e.toString());
     }
+    ref.invalidate(isProcessingProvider);
   }
 
   Future<void> addToCart({
@@ -169,6 +171,7 @@ class CartServices {
       );
       log('Add to cart error: $e');
     }
+    ref.invalidate(isProcessingProvider);
   }
 
   Future<Order> placeOrder(

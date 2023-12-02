@@ -22,7 +22,7 @@ class OrderProductsBox extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(1.h),
       width: 85.w,
-      decoration: const BoxDecoration(color: LifestyleColors.kTaupeDarkened),
+      decoration: const BoxDecoration(color: LifestyleColors.kTaupeDark),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

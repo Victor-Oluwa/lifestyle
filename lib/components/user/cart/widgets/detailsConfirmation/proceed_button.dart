@@ -20,13 +20,13 @@ class OrderDetailsProceedButton extends StatelessWidget {
     return TextButton(
       onPressed: onTap,
       child: Container(
-        color: Colors.black,
+        color: LifestyleColors.black,
         height: 8.h,
         width: double.infinity,
         // padding: EdgeInsets.all(1.h),
         alignment: Alignment.center,
         child: MediumText(
-          color: LifestyleColors.kTaupeBackground,
+          color: LifestyleColors.white,
           text: text.toUpperCase(),
           size: 18.sp,
           font: LifestyleFonts.kComorantBold,

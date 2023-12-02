@@ -63,42 +63,51 @@ class _AuthSignInScreenState extends ConsumerState<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFB0A291),
-      resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                buildSignInText(),
-                buildSignInForm(),
-                SizedBox(
-                  height: 5.h,
+        child: Container(
+          constraints: const BoxConstraints.expand(),
+          child: Stack(
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    buildSignInText(),
+                    buildSignInForm(),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    buildSignInButton(),
+                  ],
                 ),
-                buildSignInButton(),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                MediumText(
-                  font: comorant,
-                  text: 'Don\'t have an account? ',
-                  color: LifestyleColors.white,
-                ),
-                IconButton(
-                  onPressed: () {
-                    x.Get.offAll(() => const SignUpScreen());
-                  },
-                  icon: MediumText(
-                    font: comorant,
-                    text: 'Sign up',
-                    color: LifestyleColors.kTaupeDarkened,
+              ),
+              Positioned(
+                bottom: 0.h,
+                left: 25.w,
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      MediumText(
+                        font: comorant,
+                        text: 'Don\'t have an account? ',
+                        color: LifestyleColors.white,
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          x.Get.offAll(() => const SignUpScreen());
+                        },
+                        icon: MediumText(
+                          font: comorant,
+                          text: 'Sign up',
+                          color: LifestyleColors.kTaupeDarkened,
+                        ),
+                      )
+                    ],
                   ),
-                )
-              ],
-            )
-          ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

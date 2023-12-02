@@ -118,4 +118,7 @@ final fetchOrdersProvider = FutureProvider.autoDispose((ref) async {
   return await profileFunctions.fetchOrders();
 });
 
+final isProcessingProvider = StateProvider((ref) => false);
+
+
 // class ProviderOperation {}

@@ -10,8 +10,8 @@ import 'package:lifestyle/models-classes/order.dart';
 
 import '../../../../Common/colors/lifestyle_colors.dart';
 
-class OrderItemDetails extends StatelessWidget {
-  const OrderItemDetails({
+class ItemsInOrder extends StatelessWidget {
+  const ItemsInOrder({
     Key? key,
     required this.order,
     required this.cartFunction,

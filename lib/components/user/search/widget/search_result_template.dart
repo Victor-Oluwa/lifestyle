@@ -22,7 +22,6 @@ class _SearchedProductsTemplateState
     extends ConsumerState<SearchedResultTemplate> {
   void addTocart(Product product) {
     final cartServices = ref.read(cartServicesProvider);
-
     cartServices.addToCart(product: product);
   }
 
@@ -104,6 +103,7 @@ class _SearchedProductsTemplateState
               ),
               GestureDetector(
                 onTap: () {
+                  ref.read(isProcessingProvider.notifier).state = true;
                   final bouncer = ref.read(bouncerProvider);
                   bouncer.run(() {
                     addTocart(widget.product);
