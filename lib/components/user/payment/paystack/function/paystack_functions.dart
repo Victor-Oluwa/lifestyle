@@ -94,12 +94,13 @@ class PaystackFunctions {
 
           if (context.mounted) {
             checkOut(
-                authorizationURL: authorizationURL,
-                accessCode: accessCode,
-                amount: amount,
-                context: context,
-                onSuccess: onSuccess,
-                orderId: orderId);
+              authorizationURL: authorizationURL,
+              accessCode: accessCode,
+              amount: amount,
+              context: context,
+              onSuccess: onSuccess,
+              orderId: orderId,
+            );
           }
           ref.invalidate(isProcessingProvider);
         } else {

@@ -78,8 +78,6 @@ SnackbarController showBottomSnackBar(
     messageText: MediumText(text: message),
     backgroundColor: Colors.black,
     duration: const Duration(seconds: 5),
-    title: title,
-    message: message,
   ));
 }
 

@@ -145,6 +145,8 @@ class CartServices {
 
         x.Get.snackbar('Success', 'Item has been added to your cart');
       } else {
+        ref.invalidate(isProcessingProvider);
+
         throw APIException(
           message: response.body,
           statusCode: response.statusCode,
@@ -165,6 +167,7 @@ class CartServices {
       }
       log('${e.statusCode} Error: ${e.message}');
     } catch (e) {
+      ref.invalidate(isProcessingProvider);
       dropperMessage(
         kAddToCartErrorMessage['Title'],
         kAddToCartErrorMessage['Body'],
@@ -197,8 +200,10 @@ class CartServices {
         result = Order.fromMap(jsonDecode(res.body));
         userNotifier.updateOrder(order: res.body);
       } else if (res.statusCode == 404) {
+        ref.invalidate(isProcessingProvider);
         Get.to(() => const OutOfStockScreen(), arguments: jsonDecode(res.body));
       } else {
+        ref.invalidate(isProcessingProvider);
         throw APIException(
           message: res.body,
           statusCode: res.statusCode,
@@ -215,6 +220,7 @@ class CartServices {
       }
       return Order.empty();
     } catch (e) {
+      ref.invalidate(isProcessingProvider);
       dropperMessage('Failed To Process Order', 'Try again latter');
       // showSnackBar(errorMessageTitle, errorMesssage);
       log('Could not place order: $e');

@@ -14,7 +14,6 @@ class OutOfStockScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.invalidate(isProcessingProvider);
     final List<dynamic> outOfStocks = Get.arguments;
     return Scaffold(
       backgroundColor: LifestyleColors.kTaupeBackground,

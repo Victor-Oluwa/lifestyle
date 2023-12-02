@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
+import 'package:lifestyle/Common/widgets/cache_image.dart';
 import 'package:lifestyle/components/admin/admin-tab/admin_tab.dart';
 import 'package:lifestyle/components/user/cart/widgets/detailsConfirmation/edit_details_dialog.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -89,13 +90,12 @@ class UserImageAndSideIconWidget extends ConsumerWidget {
   Widget buildUserImage() {
     return Container(
       width: 70.w,
-      height: 50.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(15.sp),
         ),
-        color: Colors.transparent,
-        image: profileFunctions.loadUserPicture(),
+        color: Colors.blue,
+        // image: profileFunctions.loadUserPicture(),
       ),
       child: buildUserDetails(),
     );
@@ -105,6 +105,15 @@ class UserImageAndSideIconWidget extends ConsumerWidget {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
+        SizedBox(
+          height: 50.h,
+          child: ClipRRect(
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(15.sp),
+            ),
+            child: profileFunctions.loadUserPicture(),
+          ),
+        ),
         Container(
           height: 20.h,
           width: double.infinity,

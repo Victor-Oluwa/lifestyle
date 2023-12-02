@@ -5,6 +5,7 @@ import 'package:lifestyle/Common/widgets/app_constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:lifestyle/Common/widgets/utils.dart';
 import 'package:lifestyle/core/error/exception/api_exception.dart';
+import 'package:lifestyle/state/providers/actions/provider_operations.dart';
 import 'package:lifestyle/state/providers/provider_model/user_provider.dart';
 
 import '../../../../../Common/widgets/snackbar_messages.dart';
@@ -36,6 +37,7 @@ class PaystackServices {
         dev.log('Returned statusCode: ${res.statusCode}');
         return json.decode(res.body) as Map<String, dynamic>;
       } else {
+        ref.invalidate(isProcessingProvider);
         throw APIException(
           message: jsonEncode(res.body),
           statusCode: res.statusCode,
@@ -71,8 +73,10 @@ class PaystackServices {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
+        ref.invalidate(isProcessingProvider);
         return true;
       } else {
+        ref.invalidate(isProcessingProvider);
         throw APIException(
           message: response.body,
           statusCode: response.statusCode,
@@ -82,6 +86,7 @@ class PaystackServices {
       dev.log('${e.statusCode} Error: ${e.message}');
       return false;
     } catch (e) {
+      ref.invalidate(isProcessingProvider);
       dev.log('Failed to Verify payment: $e');
       return false;
     }

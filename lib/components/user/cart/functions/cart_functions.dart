@@ -73,6 +73,7 @@ class CartFunctions {
       if (connected) {
         await cartServices.addToCart(product: product);
       } else {
+        ref.invalidate(isProcessingProvider);
         showBottomSnackBar(
             message: 'Connect to the internet and try again',
             title: 'No Internet');
