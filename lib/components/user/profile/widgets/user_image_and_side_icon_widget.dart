@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
-import 'package:lifestyle/Common/widgets/cache_image.dart';
 import 'package:lifestyle/components/admin/admin-tab/admin_tab.dart';
 import 'package:lifestyle/components/user/cart/widgets/detailsConfirmation/edit_details_dialog.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -107,6 +106,7 @@ class UserImageAndSideIconWidget extends ConsumerWidget {
       children: [
         SizedBox(
           height: 50.h,
+          width: 70.w,
           child: ClipRRect(
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(15.sp),

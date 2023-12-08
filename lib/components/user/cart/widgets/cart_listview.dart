@@ -1,6 +1,5 @@
 import 'package:flutter/Material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lifestyle/components/user/cart/functions/cart_functions.dart';
 import 'package:lifestyle/components/user/cart/widgets/cart_item_widget.dart';
 import 'package:lifestyle/models-classes/cart.dart';
 

@@ -138,7 +138,7 @@ class _CartItemState extends ConsumerState<CartItemWidget> {
     );
   }
 
-  InkWell buildSettingsButton(
+  Widget buildSettingsButton(
       {required CartFunctions cartFunctions,
       required Product product,
       required int quantity}) {
@@ -152,6 +152,7 @@ class _CartItemState extends ConsumerState<CartItemWidget> {
                 .watch(cartFunctionProvider)
                 .getProductQuantity(product.id)
                 .then((maxValue) {
+                ref.invalidate(isProcessingProvider);
                 showDialog(
                     barrierDismissible: false,
                     barrierColor: LifestyleColors.black.withOpacity(0.8),

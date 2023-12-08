@@ -1,9 +1,12 @@
 import 'dart:developer';
 
+import 'package:dotted_border/dotted_border.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle/Common/colors/lifestyle_colors.dart';
 import 'package:lifestyle/Common/fonts/lifestyle_fonts.dart';
 import 'package:lifestyle/Common/widgets/medium_text.dart';
+import 'package:lifestyle/components/admin/order-details/tracking/screen/order_tracking_screen.dart';
 import 'package:lifestyle/models-classes/order.dart';
 import 'package:lifestyle/components/admin/order-details/function/order_details_function.dart';
 import 'package:get/get.dart' as x;
@@ -15,12 +18,18 @@ import 'package:lifestyle/state/providers/provider_model/user_provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter/Material.dart';
 import 'package:tuple/tuple.dart';
+import '../../../../Common/strings/strings.dart';
 import '../../../../core/error/widgets/error_message_widget.dart';
 import '../../../../models-classes/user.dart';
 import '../../../../state/providers/provider_model/orders_provider.dart';
 import 'package:get/get.dart';
 
+import '../../orders/widgets/receipt_button.dart';
+import '../../orders/widgets/receipt_view.dart';
 import '../../orders/widgets/tracker_done_button.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as ps;
+import 'package:printing/printing.dart';
 
 class OrderDetailsScreen extends ConsumerStatefulWidget {
   const OrderDetailsScreen({
@@ -39,17 +48,17 @@ class _OrderDetailsScreenState extends ConsumerState<OrderDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final OrderDetailsFunction orderDetailsFunction =
+    final OrderDetailsFunctions orderDetailsFunctions =
         ref.watch(orderDetailsFunctionProvider);
     final User user = ref.read(userProvider);
     final cartFunctions = ref.read(cartFunctionProvider);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.black.withOpacity(0.3),
+        backgroundColor: LifestyleColors.black,
         title: MediumText(
             font: LifestyleFonts.kCeraMedium,
-            color: LifestyleColors.kTaupeDarkened,
+            color: LifestyleColors.white,
             size: 22,
             text:
                 ref.watch(orderProvider).status < 3 ? 'Pending' : 'Completed'),
@@ -132,48 +141,50 @@ class _OrderDetailsScreenState extends ConsumerState<OrderDetailsScreen> {
                   SizedBox(
                     height: 5.h,
                   ),
-                  MediumText(
-                    font: LifestyleFonts.kCeraMedium,
-                    text: 'Tracking',
-                    size: 16.sp,
-                    color: LifestyleColors.kTaupeDarkened,
+                  Center(
+                    child: IconButton(
+                      onPressed: () {
+                        Get.to(
+                          () => OrderTrackingScreen(
+                            order: order,
+                          ),
+                        );
+                      },
+                      icon: Container(
+                        alignment: Alignment.center,
+                        color: LifestyleColors.black,
+                        height: 7.h,
+                        width: double.infinity,
+                        child: const MediumText(
+                            color: LifestyleColors.kTaupeDarkened,
+                            text: 'Track Progress'),
+                      ),
+                    ),
                   ),
-                  ref
-                      .watch(getOrderStatusProvider(
-                    Tuple2<BuildContext, Order>(context, order),
-                  ))
-                      .when(
-                    data: (data) {
-                      log('Product current step: $data');
-                      log('Refreshed:');
-
-                      return OrderTrackerStepper(
-                          status: data,
-                          order: order,
-                          ref: ref,
-                          orderDetailsFunction: orderDetailsFunction);
-                    },
-                    error: (e, st) {
-                      return const ErrorMessageWidget(
-                        errorMessage: 'Could not load tracker. Try again later',
-                      );
-                    },
-                    loading: () {
-                      return const CircularProgressIndicator();
-                    },
-                  ),
-                  ref.watch(userProvider).type == 'admin'
-                      ? GestureDetector(
-                          onTap: () {
-                            orderDetailsFunction.changeOrderStatus(
-                              context: context,
+                  SizedBox(height: 2.h),
+                  IconButton(
+                    onPressed: () {
+                      showGeneralDialog(
+                          context: context,
+                          transitionDuration: const Duration(milliseconds: 500),
+                          barrierDismissible: true,
+                          barrierLabel: '',
+                          barrierColor: LifestyleColors.kTaupeDark,
+                          transitionBuilder: (context, a1, a2, widget) {
+                            return ReceiptViewWidget(
+                              orderFunctions: orderDetailsFunctions,
+                              a1: a1,
+                              a2: a2,
+                              widget: widget,
                               order: order,
-                              status: 0,
                             );
                           },
-                          child: const TrackerResetButton(),
-                        )
-                      : const SizedBox()
+                          pageBuilder: (context, animation1, animation2) {
+                            return widget;
+                          });
+                    },
+                    icon: const ReceiptButton(),
+                  ),
                 ],
               ),
             ),

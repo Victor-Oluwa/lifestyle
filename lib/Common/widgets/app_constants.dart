@@ -1,8 +1,8 @@
 import 'package:flutter/Material.dart';
 
 //URLs
-// String uri = 'http://192.168.180.1:3000';
-String uri = 'https://ttttt-8nwp.onrender.com';
+String uri = 'http://192.168.93.1:3000';
+// String uri = 'https://ttttt-8nwp.onrender.com';
 
 String payStackInitUrl = 'https://api.paystack.co/transaction/initialize';
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart' as x;
 import 'package:lifestyle/Common/colors/lifestyle_colors.dart';
-import 'package:lifestyle/Common/widgets/loading_indicator.dart';
 import 'package:lifestyle/Common/widgets/processing_indicator.dart';
 
 import 'package:lifestyle/state/providers/actions/provider_operations.dart';

@@ -7,7 +7,6 @@ import 'package:lifestyle/Common/widgets/app_constants.dart';
 import 'package:lifestyle/Common/widgets/snackbar_messages.dart';
 import 'package:lifestyle/Common/widgets/utils.dart' as snack;
 import 'package:lifestyle/common/widgets/utils.dart';
-import 'package:lifestyle/components/user/cart/provider/cart_provider.dart';
 import 'package:lifestyle/state/providers/actions/provider_operations.dart';
 import 'package:lifestyle/state/providers/provider_model/user_provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';

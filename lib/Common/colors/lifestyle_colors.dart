@@ -7,7 +7,7 @@ class LifestyleColors {
   static const kTaupeDarkened = Color(0xFF4b4136);
   static const kMiniBlack = Colors.black26;
   static const transparent = Colors.transparent;
-
+  static const shadowColor = Colors.grey;
   static const black = Colors.black;
   static const white = Colors.white70;
 }

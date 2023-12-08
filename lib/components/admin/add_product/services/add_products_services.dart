@@ -137,9 +137,11 @@ class AddProductServices {
       dropperMessage('ATTENTION', 'An error occured while uploading item');
       log('Failed to add product: $e');
     }
+
     /*Sets isUploading provider to false when operation is finished
       either with an error or with success which will stop the uploading 
       progress indicator*/
+
     ref.read(isUploadingProvider.notifier).state = false;
     return result;
   }

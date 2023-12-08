@@ -89,4 +89,15 @@ class OrderDetailsServices {
 
     return changedStatus;
   }
+
+  Future<http.Response> createReceipt(Map<String, dynamic> receiptDetails) {
+    final url = 'https://invoice.zoho.com/api/v1/receipts';
+    final headers = {
+      'Authorization': 'Zoho-oauthtoken YOUR_OAUTH_TOKEN',
+      'Content-Type': 'application/json'
+    };
+    final body = jsonEncode(receiptDetails);
+
+    return http.post(Uri.parse(url), headers: headers, body: body);
+  }
 }

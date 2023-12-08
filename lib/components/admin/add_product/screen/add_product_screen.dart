@@ -12,6 +12,8 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../Common/widgets/medium_text.dart';
 
+final firebaseCustomTokenProvider = StateProvider((ref) => '');
+
 final isUploadingProvider = StateProvider((ref) => false);
 
 class AddProductScreen extends ConsumerStatefulWidget {

@@ -3,7 +3,6 @@ import 'package:flutter/Material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:lifestyle/Common/colors/lifestyle_colors.dart';
-import 'package:lifestyle/Common/widgets/app_constants.dart';
 import 'package:lifestyle/common/widgets/medium_text.dart';
 import 'package:lifestyle/components/admin/orders/functions/order_functions.dart';
 import 'package:lifestyle/models-classes/order.dart';

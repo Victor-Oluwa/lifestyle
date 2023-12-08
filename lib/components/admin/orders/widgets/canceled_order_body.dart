@@ -62,7 +62,7 @@ class CanceledOrderBody extends StatelessWidget {
                             padding: EdgeInsets.all(2.w),
                             decoration: const BoxDecoration(
                                 color: LifestyleColors.transparent),
-                            child: MediumText(
+                            child: const MediumText(
                               text: 'Canceled',
                               color: LifestyleColors.kTaupeBackground,
                             ),

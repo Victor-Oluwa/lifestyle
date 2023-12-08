@@ -75,6 +75,9 @@ dependencies:
   flutter_secure_storage: ^8.1.0
   lottie: ^2.7.0
   numberpicker: ^2.1.2
+  printing: ^5.11.1
+  pdf: ^3.10.7
+  firebase_auth: ^4.15.0
 
 dev_dependencies:
   flutter_test:

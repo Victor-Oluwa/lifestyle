@@ -2,15 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart' as x;
-import 'package:lifestyle/Common/fonts/lifestyle_fonts.dart';
 import 'package:lifestyle/components/user/Documents/screens/privacy_policy.dart';
 import 'package:lifestyle/components/user/auth/screen/login.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:lifestyle/Common/colors/lifestyle_colors.dart';
 import 'package:lifestyle/Common/widgets/app_constants.dart';
-import 'package:lifestyle/routes-management/lifestyle_routes_names.dart';
-import 'package:lifestyle/state/providers/actions/provider_operations.dart';
 
 import '../../../../Common/strings/strings.dart';
 import '../../../../Common/widgets/floating_text_editor.dart';

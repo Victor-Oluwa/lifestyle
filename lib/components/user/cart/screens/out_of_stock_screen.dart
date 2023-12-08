@@ -7,7 +7,6 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../Common/fonts/lifestyle_fonts.dart';
 import '../../../../common/widgets/medium_text.dart';
-import '../../../../state/providers/actions/provider_operations.dart';
 
 class OutOfStockScreen extends ConsumerWidget {
   const OutOfStockScreen({super.key});

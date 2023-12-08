@@ -1,13 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle/components/admin/add_product/provider/add_product_provider.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:lifestyle/state/providers/provider_model/user_provider.dart';
 
-import '../../../../Common/colors/lifestyle_colors.dart';
 import '../../../../Common/widgets/processing_indicator.dart';
 import '../../../../Common/widgets/utils.dart';
 import '../../../../state/providers/actions/provider_operations.dart';

@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:lifestyle/Common/colors/lifestyle_colors.dart';
 import 'package:lifestyle/components/admin/update-products/widgets/update_product_category_widget.dart';
-import 'package:lottie/lottie.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:lifestyle/Common/widgets/custom_textfield.dart';

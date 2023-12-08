@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/Material.dart';
+import 'package:lifestyle/Common/widgets/cache_image.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:lifestyle/Common/widgets/app_constants.dart';
@@ -43,12 +44,9 @@ class ItemsInOrder extends StatelessWidget {
                     height: 14.h,
                     width: 14.h,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10.sp),
-                      child: Image(
-                        fit: BoxFit.cover,
-                        image: CachedNetworkImageProvider(
-                          order.products[i].images[0],
-                        ),
+                      borderRadius: BorderRadius.circular(5.sp),
+                      child: cacheImage(
+                        order.products[i].images[0],
                       ),
                     ),
                   ),

@@ -1,17 +1,21 @@
-import 'dart:developer';
-
 import 'package:flutter/Material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle/models-classes/order.dart';
 import 'package:lifestyle/models-classes/user.dart';
 import 'package:lifestyle/state/providers/actions/provider_operations.dart';
 import 'package:lifestyle/state/providers/provider_model/user_provider.dart';
-import '../../../../Common/widgets/app_constants.dart';
-import '../../../../Common/widgets/medium_text.dart';
 
-class OrderDetailsFunction {
+import 'package:printing/printing.dart';
+import 'package:pdf/widgets.dart' as ps;
+import 'package:pdf/pdf.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+
+import '../../../../Common/colors/lifestyle_colors.dart';
+import '../../../../Common/strings/strings.dart';
+
+class OrderDetailsFunctions {
   final Ref ref;
-  OrderDetailsFunction({required this.ref});
+  OrderDetailsFunctions({required this.ref});
   int fetchedOrderStatus = 0;
   int currentStep = 0;
   int fetchedStatus = 0;
@@ -40,58 +44,253 @@ class OrderDetailsFunction {
     // ref.read(orderStatusStateProvider.notifier).state = orderStatus;
   }
 
-  Future<void> changeOrderStatus({
-    required BuildContext context,
-    required Order order,
-    required int status,
-  }) async {
-    await ref
-        .read(orderDetailsProvider)
-        .changeOrderStatus(
-          context: context,
-          status: status,
-          order: order,
-        )
-        .then((value) {
-      log('Invalidate called');
-      ref.invalidate(getOrderStatusProvider);
-    });
-
-    // ref.read(orderStatusStateProvider.notifier).state = orderStatus;
-  }
-
-  List<Step> buildSteps({required int status}) {
-    // final orderStatusStProvider = order.status;
-    return [
-      Step(
-        label: const Icon(Icons.check_box),
-        title: MediumText(text: 'Queue', font: comorant),
-        content: MediumText(text: 'Order has been placed', font: comorant),
-        isActive: status >= 0,
-        state: status >= 0 ? StepState.complete : StepState.indexed,
-      ),
-      Step(
-        title: MediumText(text: 'In Progress', font: comorant),
-        content: MediumText(text: 'Order is beign processed', font: comorant),
-        isActive: status >= 1,
-        state: status >= 1 ? StepState.complete : StepState.indexed,
-      ),
-      Step(
-        title: MediumText(text: 'Received', font: comorant),
-        content:
-            MediumText(text: 'You have received your order', font: comorant),
-        isActive: status >= 2,
-        state: status >= 2 ? StepState.complete : StepState.indexed,
-      ),
-      Step(
-        label: const Icon(Icons.check_box),
-        title: MediumText(text: 'Completed', font: comorant),
-        content: MediumText(text: 'Order Completed', font: comorant),
-        isActive: status >= 3,
-        state: status >= 3 ? StepState.complete : StepState.indexed,
-      ),
-    ];
-  }
-
   // get buildStep => _buildSteps;
+
+  Future<void> printReceipt(order) async {
+    final doc = ps.Document();
+    final image = await imageFromAssetBundle(
+      LifestyleImages.whiteLogoImage,
+    );
+    doc.addPage(
+      ps.Page(
+        pageFormat: PdfPageFormat.a4,
+        build: (ps.Context context) {
+          return buildPrintableReciept(image: image, order: order);
+        },
+      ),
+    );
+    await Printing.layoutPdf(onLayout: (PdfPageFormat) => doc.save());
+  }
+
+  ps.Center buildPrintableReciept({required image, required order}) {
+    return ps.Center(
+      child: ps.Container(
+        color: PdfColor.fromInt(LifestyleColors.kTaupeBackground.value),
+        padding: ps.EdgeInsets.all(3.w),
+        margin: ps.EdgeInsets.symmetric(vertical: 10.h, horizontal: 5.w),
+        child: ps.Column(
+          crossAxisAlignment: ps.CrossAxisAlignment.center,
+          children: [
+            receitLogo(image),
+            receitTitleText(),
+            ps.SizedBox(
+              height: 2.h,
+            ),
+            receitOrderDetails(order),
+            ps.SizedBox(
+              height: 2.h,
+            ),
+            receitProductDetails(order),
+            ps.SizedBox(
+              height: 2.h,
+            ),
+            receitCostInfo(order),
+            ps.SizedBox(height: 4.h),
+          ],
+        ),
+      ),
+    );
+  }
+
+  ps.Container receitCostInfo(order) {
+    return ps.Container(
+      padding: ps.EdgeInsets.all(3.w),
+      child: ps.Column(
+        children: [
+          ps.Row(
+            mainAxisAlignment: ps.MainAxisAlignment.spaceBetween,
+            children: [
+              ps.Text(
+                'Shipping fee',
+                style: ps.TextStyle(
+                  color: PdfColor.fromInt(LifestyleColors.white.value),
+                ),
+              ),
+              ps.Text(
+                '0.0',
+                style: ps.TextStyle(
+                  color: PdfColor.fromInt(LifestyleColors.white.value),
+                ),
+              ),
+            ],
+          ),
+          ps.Row(
+            mainAxisAlignment: ps.MainAxisAlignment.spaceBetween,
+            children: [
+              ps.Text(
+                'VAT',
+                style: ps.TextStyle(
+                  color: PdfColor.fromInt(LifestyleColors.white.value),
+                ),
+              ),
+              ps.Text(
+                '0.0',
+                style: ps.TextStyle(
+                  color: PdfColor.fromInt(LifestyleColors.white.value),
+                ),
+              ),
+            ],
+          ),
+          ps.Row(
+            mainAxisAlignment: ps.MainAxisAlignment.spaceBetween,
+            children: [
+              ps.Text(
+                'Total',
+                style: ps.TextStyle(
+                  color: PdfColor.fromInt(LifestyleColors.white.value),
+                ),
+              ),
+              ps.Text(
+                order.totalPrice.toString(),
+                style: ps.TextStyle(
+                  color: PdfColor.fromInt(LifestyleColors.white.value),
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  ps.Container receitProductDetails(order) {
+    return ps.Container(
+      margin: ps.EdgeInsets.symmetric(horizontal: 3.w),
+      child: ps.Column(
+        children: order.products.map<ps.Widget>((product) {
+          final index = order.products.indexOf(product);
+          return ps.Row(
+            crossAxisAlignment: ps.CrossAxisAlignment.start,
+            children: [
+              ps.Expanded(
+                child: ps.Column(
+                  crossAxisAlignment: ps.CrossAxisAlignment.start,
+                  children: [
+                    ps.Text(
+                      product.name,
+                      style: ps.TextStyle(
+                        color: PdfColor.fromInt(LifestyleColors.white.value),
+                      ),
+                    ),
+                    ps.Text(
+                      product.price.toString(),
+                      style: ps.TextStyle(
+                        color: PdfColor.fromInt(LifestyleColors.white.value),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ps.Text(
+                order.quantity[index].toString(),
+                style: ps.TextStyle(
+                  color: PdfColor.fromInt(LifestyleColors.white.value),
+                ),
+              ),
+            ],
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  ps.Container receitOrderDetails(order) {
+    return ps.Container(
+      padding: ps.EdgeInsets.all(3.w),
+      child: ps.Column(
+        children: [
+          ps.Row(
+            mainAxisAlignment: ps.MainAxisAlignment.spaceBetween,
+            children: [
+              ps.Text(
+                'Date',
+                style: ps.TextStyle(
+                  color: PdfColor.fromInt(LifestyleColors.white.value),
+                ),
+              ),
+              ps.Text(
+                '${order.orderTime}',
+                style: ps.TextStyle(
+                  color: PdfColor.fromInt(LifestyleColors.white.value),
+                ),
+              ),
+            ],
+          ),
+          ps.Row(
+            mainAxisAlignment: ps.MainAxisAlignment.spaceBetween,
+            children: [
+              ps.Text(
+                'Customer name',
+                style: ps.TextStyle(
+                  color: PdfColor.fromInt(LifestyleColors.white.value),
+                ),
+              ),
+              ps.Text(
+                order.customerName,
+                style: ps.TextStyle(
+                  color: PdfColor.fromInt(LifestyleColors.white.value),
+                ),
+              ),
+            ],
+          ),
+          ps.Row(
+            mainAxisAlignment: ps.MainAxisAlignment.spaceBetween,
+            children: [
+              ps.Text(
+                'Order ID',
+                style: ps.TextStyle(
+                  color: PdfColor.fromInt(LifestyleColors.white.value),
+                ),
+              ),
+              ps.Text(
+                order.id,
+                style: ps.TextStyle(
+                  color: PdfColor.fromInt(LifestyleColors.white.value),
+                ),
+              ),
+            ],
+          ),
+          ps.Row(
+            mainAxisAlignment: ps.MainAxisAlignment.spaceBetween,
+            children: [
+              ps.Text(
+                'Status',
+                style: ps.TextStyle(
+                  color: PdfColor.fromInt(LifestyleColors.white.value),
+                ),
+              ),
+              ps.Text(
+                order.status == 0
+                    ? 'Queu'
+                    : order.status == 1
+                        ? 'In Progress'
+                        : order.status == 2
+                            ? 'Recieved'
+                            : order.status == 3
+                                ? 'Completed'
+                                : 'Nill',
+                style: ps.TextStyle(
+                  color: PdfColor.fromInt(LifestyleColors.white.value),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  ps.Text receitTitleText() {
+    return ps.Text('Purchase Receipt',
+        style: ps.TextStyle(
+          color: PdfColor.fromInt(LifestyleColors.white.value),
+        ));
+  }
+
+  ps.Image receitLogo(image) {
+    return ps.Image(
+      image,
+      height: 7.h,
+    );
+  }
 }

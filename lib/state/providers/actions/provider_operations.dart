@@ -39,7 +39,7 @@ final notificationServicesProvider = Provider((ref) => NotificationServices(
 final notificationFunctionProvider = Provider((ref) => NotificationFunction(
     ref: ref, firebaseMessaging: FirebaseMessaging.instance));
 final orderDetailsFunctionProvider =
-    Provider.autoDispose((ref) => OrderDetailsFunction(ref: ref));
+    Provider.autoDispose((ref) => OrderDetailsFunctions(ref: ref));
 final allProductsFunctionProvider =
     Provider((ref) => AllProductFunctions(ref: ref));
 final orderServicesProvider = Provider((ref) => OrderServices(ref));

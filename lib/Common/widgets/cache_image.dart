@@ -33,7 +33,7 @@ CachedNetworkImage cacheImage(String url) {
       ),
     ),
     errorWidget: (context, url, error) => const Center(
-      child: MediumText(text: 'Not available. Check your connection'),
+      child: MediumText(text: 'Failed to load image'),
     ),
   );
 }

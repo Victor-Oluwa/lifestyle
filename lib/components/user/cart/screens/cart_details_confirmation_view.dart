@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:lifestyle/Common/widgets/processing_indicator.dart';
-import 'package:lifestyle/components/user/cart/provider/cart_provider.dart';
 import 'package:lifestyle/core/bouncer/provider/bouncer_provider.dart';
 import 'package:lifestyle/state/providers/actions/provider_operations.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
