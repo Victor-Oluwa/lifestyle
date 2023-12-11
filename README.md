@@ -5,8 +5,7 @@ Welcome to my Flutter-based Augmented Reality (AR) Furniture E-Commerce App for 
 ## Key Features:
 
 - **Node.js Backend with MongoDB:**
-  - A robust and scalable backend built on Node.js, ensuring seamless communication with the MongoDB database for efficient data storage and retrieval. Check the backend repo at (https://github.com/Victor- 
-    Oluwa/lifestyle-backend.git) for instuctions on how to set up the backend.
+  - A robust and scalable backend built on Node.js, ensuring seamless communication with the MongoDB database for efficient data storage and retrieval. Check the backend repo at (https://github.com/Victor-Oluwa/lifestyle-backend.git) for instuctions on how to set up the backend.
 
 - **Firebase Push Notification:**
   - Keep users engaged and informed with Firebase push notifications, delivering real-time updates and personalized messages. Follow the steps below to configure Firebase.
