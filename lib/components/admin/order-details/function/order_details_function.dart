@@ -49,7 +49,7 @@ class OrderDetailsFunctions {
   Future<void> printReceipt(order) async {
     final doc = ps.Document();
     final image = await imageFromAssetBundle(
-      LifestyleImages.whiteLogoImage,
+      LifestyleAssetImages.whiteLogoImage,
     );
     doc.addPage(
       ps.Page(

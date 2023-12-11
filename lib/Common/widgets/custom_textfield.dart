@@ -16,6 +16,7 @@ class CustomTextField extends StatefulWidget {
     this.readOnly = false,
     this.selection,
     this.textInputType,
+    this.signInFormKey,
   }) : super(key: key);
   final TextEditingController controller;
   final String label;
@@ -24,6 +25,7 @@ class CustomTextField extends StatefulWidget {
   final bool readOnly;
   final bool? selection;
   final TextInputType? textInputType;
+  final Key? signInFormKey;
   // final Color? borderColor;
 
   @override
@@ -34,6 +36,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      key: widget.signInFormKey,
       keyboardType: widget.textInputType,
       style: TextStyle(fontFamily: comorant),
       readOnly: widget.readOnly,
@@ -72,7 +75,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       ),
       validator: (val) {
         if (val == null || val.isEmpty) {
-          return 'Enter ${widget.hintText}';
+          return 'This field cannot be empty';
         }
         return null;
       },
@@ -80,42 +83,3 @@ class _CustomTextFieldState extends State<CustomTextField> {
     );
   }
 }
-
-
-
-
-
-
-// class _CustomTextFieldState extends State<CustomTextField> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return TextFormField(
-//       readOnly: widget.readOnly,
-//       enableInteractiveSelection: widget.selection,
-//       cursorColor: const Color(AppConstants.taupe),
-//       controller: widget.controller,
-//       decoration: InputDecoration(
-//         border: const OutlineInputBorder(
-//           borderSide: BorderSide(color: Colors.black),
-//         ),
-//         focusColor: Colors.white,
-//         fillColor: Colors.white,
-//         hoverColor: Colors.white,
-//         label: Text(widget.label),
-//         hintText: widget.hintText,
-//         hintTextDirection: TextDirection.ltr,
-//         enabledBorder: const OutlineInputBorder(
-//           borderSide: BorderSide(color: Colors.white),
-//         ),
-//       ),
-//       validator: (val) {
-//         if (val == null || val.isEmpty) {
-//           return 'Enter your ${widget.hintText}';
-//         }
-//         return null;
-//       },
-//       maxLines: widget.maxLines,
-//       // onChanged: (text) => setState(() {}),
-//     );
-//   }
-// }

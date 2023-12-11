@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -17,6 +18,8 @@ class FloatingTextEditor extends StatefulWidget {
     required this.label,
     this.fillColor = LifestyleColors.kTaupeBackground,
     this.materialColor = LifestyleColors.kTaupeBackground,
+    this.readOnly = false,
+    this.onFieldSubmitted,
   }) : super(key: key);
   final FocusNode focusNode;
   final bool obscureText;
@@ -27,6 +30,8 @@ class FloatingTextEditor extends StatefulWidget {
   final Widget label;
   final Color? fillColor;
   final Color? materialColor;
+  final bool readOnly;
+  final void Function(String)? onFieldSubmitted;
 
   @override
   State<FloatingTextEditor> createState() => _FloatingTextEditorState();
@@ -46,10 +51,12 @@ class _FloatingTextEditorState extends State<FloatingTextEditor> {
         height: 8.5.h,
         padding: EdgeInsets.only(top: 16.sp, bottom: 14.sp, left: 2.w),
         child: TextFormField(
+          readOnly: widget.readOnly,
           focusNode: widget.focusNode,
           validator: widget.validate,
           obscureText: widget.obscureText,
           controller: widget.controller,
+          onFieldSubmitted: widget.onFieldSubmitted,
           style: const TextStyle(fontFamily: LifestyleFonts.kComorantMedium),
           decoration: InputDecoration(
               fillColor: widget.fillColor,

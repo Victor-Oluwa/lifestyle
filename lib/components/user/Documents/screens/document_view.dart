@@ -7,14 +7,14 @@ import '../../../../Common/widgets/app_constants.dart';
 import '../../../../routes-management/lifestyle_routes_names.dart';
 import '../widgets/dropdown_widget.dart';
 
-class Documents extends StatefulWidget {
-  const Documents({super.key});
+class DocumentsView extends StatefulWidget {
+  const DocumentsView({super.key});
 
   @override
-  State<Documents> createState() => _DocumentsState();
+  State<DocumentsView> createState() => _DocumentsViewState();
 }
 
-class _DocumentsState extends State<Documents> {
+class _DocumentsViewState extends State<DocumentsView> {
   final String _brochureUrl = kBrochureUrl;
   final String _profileDocUrl = kProfileDocUrl;
 

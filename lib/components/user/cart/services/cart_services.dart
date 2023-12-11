@@ -55,40 +55,6 @@ class CartServices {
     ref.invalidate(isProcessingProvider);
   }
 
-  void minusCartQuantity({
-    required Product product,
-  }) async {
-    final User user = ref.read(userProvider);
-    final UserNotifier userNotifier = ref.read(userProvider.notifier);
-    try {
-      http.Response res = await http.delete(
-        Uri.parse('$uri/api/remove-from-cart/${product.id}'),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          AppConstants.authToken: user.token
-        },
-      );
-
-      if (res.statusCode == 200 || res.statusCode == 201) {
-        userNotifier.updateCart(cart: jsonDecode(res.body)['cart']);
-        Get.snackbar('DONE', 'Item has been removed');
-      } else {
-        throw APIException(
-          message: res.body,
-          statusCode: res.statusCode,
-        );
-      }
-    } on APIException catch (e) {
-      dropperMessage(
-        kRemoveFromCartErrorMessage['Title'],
-        kRemoveFromCartErrorMessage['Body'],
-      );
-      log('${e.statusCode} Error: ${e.message}');
-    } catch (e) {
-      log(e.toString());
-    }
-  }
-
   void deleteFromCart({
     required Product product,
   }) async {

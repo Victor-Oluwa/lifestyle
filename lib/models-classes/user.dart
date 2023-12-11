@@ -11,6 +11,7 @@ class User {
   final String token;
   final String fcmToken;
   final String picture;
+  final List<dynamic> notifications;
   final List<dynamic> cart;
 
   User(
@@ -24,6 +25,7 @@ class User {
       required this.token,
       this.fcmToken = '',
       required this.picture,
+      this.notifications = const [],
       required this.cart});
 
   User.empty()
@@ -38,6 +40,7 @@ class User {
             token: 'empty.token',
             fcmToken: 'empty.fcmToken',
             picture: 'empty.picture',
+            notifications: [],
             cart: []);
 
   Map<String, dynamic> toMap() {
@@ -52,6 +55,7 @@ class User {
       'token': token,
       'fcmToken': fcmToken,
       'cart': cart,
+      'notifications': notifications,
       'picture': picture,
     };
   }
@@ -63,15 +67,18 @@ class User {
       password: map['password'] ?? '',
       email: map['email'] ?? '',
       address: map['address'] ?? '',
-      // phone: map['phone']?.toInt() ?? 0,
       phone: map['phone'] ?? '0',
       type: map['type'] ?? '',
       token: map['token'] ?? '',
       fcmToken: map['fcmToken'] ?? '',
       picture: map['picture'] ?? '',
+      /* In this code, map['cart']?.map((cartItem) => Map<String, dynamic>.from(cartItem)) 
+      checks if the map contains a key cart. 
+      If it does, it uses the map method to transform each item in the list into a map. */
       cart: List<Map<String, dynamic>>.from(
-        map['cart']?.map((x) => Map<String, dynamic>.from(x)),
-      ),
+          map['cart']?.map((cartItem) => Map<String, dynamic>.from(cartItem))),
+      notifications: List<Map<String, dynamic>>.from(
+          map['notifications']?.map((item) => Map<String, dynamic>.from(item))),
     );
   }
   String toJson() => json.encode(toMap());
@@ -88,6 +95,7 @@ class User {
     String? picture,
     String? fcmToken,
     List<dynamic>? cart,
+    List<dynamic>? notifications,
   }) {
     return User(
       id: id ?? this.id,
@@ -100,6 +108,7 @@ class User {
       token: token ?? this.token,
       fcmToken: fcmToken ?? this.fcmToken,
       picture: picture ?? this.picture,
+      notifications: notifications ?? this.notifications,
       cart: cart ?? this.cart,
     );
   }

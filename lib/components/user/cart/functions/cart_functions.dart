@@ -35,22 +35,6 @@ class CartFunctions {
         productId: productId, quantity: quantity);
   }
 
-  increaseCartQuantity({
-    required int currentValue,
-    required int maxValue,
-  }) {
-    if (currentValue < maxValue) {
-      final newValue = currentValue + 1;
-      currentValue = newValue.clamp(0, 100);
-    }
-  }
-
-  void decreaseQuantity(Product product) {
-    final cartServices = ref.read(cartServicesProvider);
-
-    cartServices.minusCartQuantity(product: product);
-  }
-
   void deleteCartItem(Product product) {
     ref.read(isProcessingProvider.notifier).state = true;
     final cartServices = ref.read(cartServicesProvider);
@@ -88,7 +72,7 @@ class CartFunctions {
         address: address, phone: phone);
   }
 
-  List<Cart> getUserCartObject() {
+  List<Cart> getUserCartList() {
     final user = ref.watch(userProvider);
     return user.cart.map((cart) => Cart.fromMap(cart)).toList();
   }
@@ -168,7 +152,7 @@ class CartFunctions {
 
   String getSum() {
     double sum = 0;
-    final userCart = getUserCartObject();
+    final userCart = getUserCartList();
     for (var cart in userCart) {
       sum += cart.product.price * cart.quantity;
     }
@@ -183,22 +167,12 @@ class CartFunctions {
 
   String getSumWithComma() {
     double sum = 0;
-    final userCart = getUserCartObject();
+    final userCart = getUserCartList();
     for (var cart in userCart) {
       sum += cart.product.price * cart.quantity;
     }
     final sumWithComma = addCommas(sum.toString());
     log('Cart Sum: $sum');
     return sumWithComma;
-
-    // final user = ref.read(userProvider);
-    // for (var cart in user.cart) {
-    //   sum += cart['quantity'] * cart['product']['price'];
-    // }
   }
-
-  // int roundUpSum({required BuildContext context}) {
-  //   final sumRound = getSum().round();
-  //   return sumRound;
-  // }
 }

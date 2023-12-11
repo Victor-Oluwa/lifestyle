@@ -60,8 +60,9 @@ class AddProductServices {
       {required String productName, required List<File> images}) async {
     List<String> imageUrl = [];
     for (var i = 0; i < images.length; i++) {
-      final Reference reference =
-          firebaseStorage.ref().child('$productName/image/$productName');
+      final Reference reference = firebaseStorage
+          .ref()
+          .child('Products/$productName/image/$productName');
       final UploadTask task = reference.putFile(File(images[i].path));
       final TaskSnapshot snapshot =
           await task.whenComplete(() => log('Image Uploaded'));

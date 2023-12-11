@@ -61,8 +61,9 @@ class HomeServices {
       List<String> imageUrls = [];
 
       for (var file in picture) {
-        final Reference ref =
-            storage.ref().child('${user.name}/image/${user.id}');
+        final Reference ref = storage
+            .ref()
+            .child('Users/${user.email}/Profile_picture/${user.id}');
         final UploadTask task = ref.putFile(File(file.path));
         final TaskSnapshot snapshot =
             await task.whenComplete(() => dev.log('Image Uploaded'));

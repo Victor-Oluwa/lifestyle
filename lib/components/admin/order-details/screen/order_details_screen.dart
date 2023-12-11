@@ -1,7 +1,3 @@
-import 'dart:developer';
-
-import 'package:dotted_border/dotted_border.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle/Common/colors/lifestyle_colors.dart';
 import 'package:lifestyle/Common/fonts/lifestyle_fonts.dart';
@@ -12,24 +8,16 @@ import 'package:lifestyle/components/admin/order-details/function/order_details_
 import 'package:get/get.dart' as x;
 import 'package:lifestyle/components/admin/orders/widgets/general_order_details.dart';
 import 'package:lifestyle/components/admin/orders/widgets/items_in_order.dart';
-import 'package:lifestyle/components/admin/order-details/widgets/order_tracker.dart';
 import 'package:lifestyle/state/providers/actions/provider_operations.dart';
 import 'package:lifestyle/state/providers/provider_model/user_provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter/Material.dart';
-import 'package:tuple/tuple.dart';
-import '../../../../Common/strings/strings.dart';
-import '../../../../core/error/widgets/error_message_widget.dart';
 import '../../../../models-classes/user.dart';
 import '../../../../state/providers/provider_model/orders_provider.dart';
 import 'package:get/get.dart';
 
 import '../../orders/widgets/receipt_button.dart';
 import '../../orders/widgets/receipt_view.dart';
-import '../../orders/widgets/tracker_done_button.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as ps;
-import 'package:printing/printing.dart';
 
 class OrderDetailsScreen extends ConsumerStatefulWidget {
   const OrderDetailsScreen({

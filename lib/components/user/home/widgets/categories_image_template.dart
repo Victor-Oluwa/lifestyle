@@ -31,7 +31,7 @@ class CategoriesImageTemplate extends ConsumerWidget {
     return GestureDetector(
       onTap: (() {
         navigateToCategoryPage(context, GlobalVariables.categoryTitles[index]);
-        notificationFunction.uploadFcmToken();
+        // notificationFunction.uploadFcmToken();
       }),
       child: Container(
         padding: EdgeInsets.only(left: 2.w, top: 1.h, bottom: 1.h),

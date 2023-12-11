@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
+import 'dart:math' as math;
 import 'package:dio/dio.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle/Common/widgets/app_constants.dart';
 import 'package:lifestyle/Common/widgets/utils.dart';
 import 'package:lifestyle/core/error/exception/api_exception.dart';
-import 'package:lifestyle/components/user/notification/screen/new_products.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -45,7 +47,7 @@ class NotificationServices {
   void handleMessage(RemoteMessage? message) {
     if (message == null) return;
 
-    x.Get.to(() => const NewProductsScreen(), arguments: message);
+    // x.Get.to(() => const NewProductsScreen(), arguments: message);
   }
 
   initLocalNotification() async {
@@ -134,8 +136,6 @@ class NotificationServices {
     } catch (e) {
       log('Failed to get cloud messaging token: $e');
     }
-    //  final jjjj= await firebaseMessaging.;
-    log('FCMToken: $tokenFCM');
     initPushNotification();
     initLocalNotification();
   }
@@ -175,27 +175,56 @@ class NotificationServices {
     return userList;
   }
 
-  Future<void> sendNotification({
-    required String title,
-    required String body,
-  }) async {
+  String generateRandomString(int length) {
+    final random = math.Random();
+    const availableChars =
+        'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+    final randomString = List.generate(length,
+            (index) => availableChars[random.nextInt(availableChars.length)])
+        .join();
+    return randomString;
+  }
+
+  Future<String> getNotificationImageUrl(
+      {required String title, required File image}) async {
+    final FirebaseStorage storage = FirebaseStorage.instance;
+    final String imageId = generateRandomString(7);
+
+    final Reference ref =
+        storage.ref().child('Notifications/$title/image/$imageId');
+    final UploadTask task = ref.putFile(File(image.path));
+    final TaskSnapshot snapshot =
+        await task.whenComplete(() => log('Image Uploaded'));
+    final String downloadUrl = await snapshot.ref.getDownloadURL();
+    return downloadUrl;
+  }
+
+  Future<void> sendNotification(
+      {required String title,
+      required String body,
+      required File image,
+      required String action}) async {
     final users = await getUsers();
     final List<String> userIds = users.map((user) => user.id).toList();
 
-    final data = {
-      'userIds': userIds,
-      'title': title,
-      'body': body,
-    };
     final headers = {
       'Content-Type': 'application/json',
     };
 
     try {
+      // final imageUrl =
+      //     await getNotificationImageUrl(title: title, image: image);
+
       final response = await http.post(
         Uri.parse('$uri/send-notification'),
         headers: headers,
-        body: jsonEncode(data),
+        body: jsonEncode({
+          'userIds': userIds,
+          'title': title,
+          'body': body,
+          'image': 'imageUrl',
+          'action': action,
+        }),
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         log('Response from backend: ${response.body}');

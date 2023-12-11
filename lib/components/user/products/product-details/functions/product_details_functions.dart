@@ -18,11 +18,6 @@ class ProductDetailsFunctions {
     return price.replaceAllMapped(reg, matchFunc);
   }
 
-  void decreaseQuantity(Product product) {
-    final cartServices = ref.read(cartServicesProvider);
-    cartServices.minusCartQuantity(product: product);
-  }
-
   navigateToModelScreen(data) {
     x.Get.toNamed(LifestyleRouteName.modelRoute, arguments: data);
   }

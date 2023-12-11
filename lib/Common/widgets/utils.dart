@@ -52,6 +52,24 @@ Future<List<File>> pickImage() async {
   return image;
 }
 
+Future<File> pickSingleImage() async {
+  File image = File('null');
+  try {
+    var files = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: false,
+    );
+    if (files != null && files.files.isNotEmpty) {
+      for (int i = 0; i < files.files.length; i++) {
+        image = File(files.files[i].path!);
+      }
+    }
+  } catch (e) {
+    debugPrint(e.toString());
+  }
+  return image;
+}
+
 Future<List<File>> pickModel() async {
   List<File> models = [];
 

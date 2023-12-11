@@ -48,8 +48,9 @@ class UpdateProductServices {
 
     if (params.images.isNotEmpty) {
       for (var image in params.images) {
-        final Reference ref =
-            firebaseStorage.ref().child('${params.name}/image/${params.name}');
+        final Reference ref = firebaseStorage
+            .ref()
+            .child('Products/${params.name}/image/${params.name}');
         final UploadTask task = ref.putFile(File(image.path));
         await task.whenComplete(() => log('Image Uploaded'));
         final String downloadUrl = await ref.getDownloadURL();

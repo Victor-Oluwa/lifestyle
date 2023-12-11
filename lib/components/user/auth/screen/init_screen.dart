@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lifestyle/Common/strings/strings.dart';
+import 'package:lifestyle/state/providers/actions/provider_operations.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../Common/colors/lifestyle_colors.dart';
@@ -17,10 +19,11 @@ class InitScreen extends ConsumerStatefulWidget {
 class _InitScreenState extends ConsumerState<InitScreen> {
   @override
   void didChangeDependencies() {
+    ref.read(notificationFunctionProvider).uploadFcmToken();
     final authFunction = ref.watch(authFunctionsProvider(context));
 
     authFunction.checkConnection().then((isConnected) {
-      authFunction.shouldShowDialog.call(
+      authFunction.usherUser.call(
         internetAccess: isConnected,
         context: context,
       );
@@ -31,7 +34,6 @@ class _InitScreenState extends ConsumerState<InitScreen> {
 
   @override
   Widget build(BuildContext context) {
-    log('Got to Init scren');
     return Scaffold(
       backgroundColor: LifestyleColors.kTaupeBackground,
       body: Center(
@@ -41,7 +43,7 @@ class _InitScreenState extends ConsumerState<InitScreen> {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-              'images/toplogo.png',
+              LifestyleAssetImages.whiteLogoImage,
             ),
           ),
         ),

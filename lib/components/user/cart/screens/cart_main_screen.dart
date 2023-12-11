@@ -49,7 +49,7 @@ class _CartViewScreen extends ConsumerState<CartViewScreen>
   @override
   Widget build(BuildContext context) {
     final cartFunction = ref.watch(cartFunctionProvider);
-    final cart = cartFunction.getUserCartObject();
+    final cart = cartFunction.getUserCartList();
     final isProcessing = ref.watch(isProcessingProvider);
     return SafeArea(
       child: Scaffold(

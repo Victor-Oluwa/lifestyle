@@ -11,7 +11,7 @@ import 'package:lifestyle/components/user/home/screens/home.dart';
 import 'package:lifestyle/Common/widgets/custom_icon0_icons.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../../state/providers/actions/provider_operations.dart';
-import '../../Documents/screens/document_page.dart';
+import '../../Documents/screens/document_view.dart';
 import '../../ar/screen/ar_blank_page.dart';
 import '../../notification/function/notification_function.dart';
 import '../../profile/screens/profile_page.dart';
@@ -36,7 +36,7 @@ class _TabPageState extends ConsumerState<TabPage> {
 
   List pages = [
     const HomePage(),
-    const Documents(),
+    const DocumentsView(),
     const ArBlankPage(),
     const ProfilePage(),
   ];

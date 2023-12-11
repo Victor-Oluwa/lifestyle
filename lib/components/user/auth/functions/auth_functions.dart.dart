@@ -21,43 +21,47 @@ class AuthFunction {
   final Ref ref;
   final BuildContext chiefContext;
 
-  Future<void> shouldShowDialog(
+  Future<void> usherUser(
       {required bool internetAccess, required BuildContext context}) async {
     if (!internetAccess) {
-      Future.delayed(const Duration(seconds: 5), () {
-        showDialog(
-          barrierDismissible: false,
-          barrierColor: Colors.transparent,
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              surfaceTintColor: LifestyleColors.kTaupeDarkened,
-              title: const Text('No Internet Connection'),
-              content: const Text('Connect to the internet and try again'),
-              actions: <Widget>[
-                TextButton(
-                  child: const Text('Retry'),
-                  onPressed: () async {
-                    Navigator.pop(context);
-                    await checkConnection().then((isConnected) {
-                      shouldShowDialog.call(
-                          internetAccess: isConnected, context: chiefContext);
-                    });
-
-                    // await recallDialogBox();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      });
+      showNoInternetDialog(context);
     } else {
-      await confirmUserRole();
+      await confirmUserType();
     }
   }
 
-  Future<void> confirmUserRole() async {
+  showNoInternetDialog(context) {
+    Future.delayed(const Duration(seconds: 3), () {
+      showDialog(
+        barrierDismissible: false,
+        barrierColor: Colors.transparent,
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            surfaceTintColor: LifestyleColors.kTaupeDarkened,
+            title: const Text('No Internet Connection'),
+            content: const Text('Connect to the internet and try again'),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Retry'),
+                onPressed: () async {
+                  Navigator.pop(context);
+                  await checkConnection().then((isConnected) {
+                    usherUser.call(
+                        internetAccess: isConnected, context: chiefContext);
+                  });
+
+                  // await recallDialogBox();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    });
+  }
+
+  Future<void> confirmUserType() async {
     try {
       final userStatus = await authenticateUser();
       final user = ref.watch(userProvider);
