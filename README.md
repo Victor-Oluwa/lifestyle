@@ -2,6 +2,8 @@
 
 Welcome to my Flutter-based Augmented Reality (AR) Furniture E-Commerce App for furniture shopping. This mobile application seamlessly combines the worlds of furniture shopping and augmented reality to provide users with an immersive and interactive shopping experience.
 
+**NOTE:** I developed this project for Gemona West Lifestyle, the interior design firm where I currently work. It will be available on the Play Store by January. Once it is finally on the Play Store, I'll add the link here for you all to download and shop in 3D.
+
 ## Key Features:
 
 - **Node.js Backend with MongoDB:**
@@ -82,5 +84,3 @@ Welcome to my Flutter-based Augmented Reality (AR) Furniture E-Commerce App for 
 
 4. **Run the App:**
    - Open the project in Flutter and run the app on your preferred device or emulator.
-
-NOTE: I developed this project for Gemona West Lifestyle interior design firm where I currently work and it will be available on palystore by January. Once it is finally on playstore, I'll add the link here you all download and shop in 3D
