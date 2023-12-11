@@ -27,6 +27,10 @@ Welcome to my Flutter-based Augmented Reality (AR) Furniture E-Commerce App for 
 
 - **Augmented Reality Furniture View (Under Development):**
   - Experience the future of furniture shopping with our AR feature, allowing users to visualize furniture in their own space before making a purchase.
+  - This feature is still under development because the 3D models for the furniture are still being created.
+
+- **Interactive 3D Model View of Furniture** 
+  - Immerse yourself in the future of furniture exploration, allowing for dynamic interaction with lifelike models before making informed purchase decisions
 
 - **E-Commerce Functionality:**
   - A comprehensive e-commerce platform that facilitates smooth browsing, selection, and purchase of furniture items.
@@ -78,3 +82,5 @@ Welcome to my Flutter-based Augmented Reality (AR) Furniture E-Commerce App for 
 
 4. **Run the App:**
    - Open the project in Flutter and run the app on your preferred device or emulator.
+
+NOTE: I developed this project for Gemona West Lifestyle interior design firm where I currently work and it will be available on palystore by January. Once it is finally on playstore, I'll add the link here you all download and shop in 3D
