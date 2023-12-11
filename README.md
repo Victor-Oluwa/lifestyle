@@ -5,31 +5,8 @@ Welcome to my Flutter-based Augmented Reality (AR) Furniture E-Commerce App for 
 ## Key Features:
 
 - **Node.js Backend with MongoDB:**
-  - A robust and scalable backend built on Node.js, ensuring seamless communication with the MongoDB database for efficient data storage and retrieval. Follow the steps below to set up the backend.
-
-    ### Backend Setup:
-
-    1. **Install Node.js:**
-       - Make sure you have Node.js installed on your server. If not, download it [here](https://nodejs.org/).
-
-    2. **Install Dependencies:**
-       - Navigate to the `backend` directory:
-         ```bash
-         cd backend
-         ```
-       - Install dependencies:
-         ```bash
-         npm install
-         ```
-
-    3. **Configure MongoDB:**
-       - Set up a MongoDB database and update the connection string in `backend/config/db.config.js`.
-
-    4. **Run the Server:**
-       - Start the Node.js server:
-         ```bash
-         npm start
-         ```
+  - A robust and scalable backend built on Node.js, ensuring seamless communication with the MongoDB database for efficient data storage and retrieval. Check the backend repo at (https://github.com/Victor- 
+    Oluwa/lifestyle-backend.git) for instuctions on how to set up the backend.
 
 - **Firebase Push Notification:**
   - Keep users engaged and informed with Firebase push notifications, delivering real-time updates and personalized messages. Follow the steps below to configure Firebase.
@@ -91,7 +68,7 @@ Welcome to my Flutter-based Augmented Reality (AR) Furniture E-Commerce App for 
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/your-repo.git
+   git clone https://github.com/Victor-Oluwa/lifestyle.git
    ```
 
 2. **Setup Backend:**
@@ -102,5 +79,3 @@ Welcome to my Flutter-based Augmented Reality (AR) Furniture E-Commerce App for 
 
 4. **Run the App:**
    - Open the project in Flutter and run the app on your preferred device or emulator.
-
-Feel free to explore, contribute, and make this AR Furniture E-Commerce App even more amazing!
