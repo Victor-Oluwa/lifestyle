@@ -54,6 +54,7 @@ Welcome to the Flutter-based Augmented Reality (AR) Furniture E-Commerce App for
 - **Payment Integration:**
   - Paystack
 
+
 ### 3D Model Preview
 
 <img src="/3d_preview.gif" width="20%" height="20%">
