@@ -74,3 +74,6 @@ Welcome to the Flutter-based Augmented Reality (AR) Furniture E-Commerce App for
 <img src="/add_product.png" width="20%" height="20%">
 <img src="/edit_product.png" width="20%" height="20%">
 <img src="/Tracking.png" width="20%" height="20%">
+
+
+Quick one, guys: Some improvements have been made to the UI, such as fixing inconsistent text colors and addressing other minor faults. I'm currently quite busy, but I'll update the screenshots as soon as possible.
