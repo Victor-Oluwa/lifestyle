@@ -62,7 +62,7 @@ Welcome to the Flutter-based Augmented Reality (AR) Furniture E-Commerce App for
 ### Some Screenshots
 
 ![Home](/Home.png)
-<img src="/Home.png" width="50%" height="50%">
+<img src="/Home.png" width="30%" height="30%">
 ![SignUp](/signUp.png)
 ![Category](/category.png)
 ![Products](/all_products.png)
