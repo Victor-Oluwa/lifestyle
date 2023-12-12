@@ -57,19 +57,19 @@ Welcome to the Flutter-based Augmented Reality (AR) Furniture E-Commerce App for
 ### 3D Model Preview
 
 ![Preview](/3d_preview.gif)
-
+<img src="/3d_preview.gif" width="20%" height="20%">
 
 ### Some Screenshots
 
-<img src="/Home.png" width="30%" height="30%"> <img src="/signUp.png" width="30%" height="30%">
-<img src="/category.png" width="30%" height="30%">
-<img src="/all_products.png" width="30%" height="30%">
-<img src="/Search.png" width="30%" height="30%">
-<img src="/Doc.png" width="30%" height="30%">
-<img src="/Cart.png" width="30%" height="30%">
-<img src="/notification.png" width="30%" height="30%">
-<img src="/AR.png" width="30%" height="30%">
-<img src="/productDetails.png" width="30%" height="30%">
-<img src="/add_product.png" width="30%" height="30%">
-<img src="/edit_product.png" width="30%" height="30%">
-<img src="/Tracking.png" width="30%" height="30%">
+<img src="/Home.png" width="20%" height="20%"> <img src="/signUp.png" width="20%" height="20%">
+<img src="/category.png" width="20%" height="20%">
+<img src="/all_products.png" width="20%" height="20%">
+<img src="/Search.png" width="20%" height="20%">
+<img src="/Doc.png" width="20%" height="20%">
+<img src="/Cart.png" width="20%" height="20%">
+<img src="/notification.png" width="20%" height="20%">
+<img src="/AR.png" width="20%" height="20%">
+<img src="/productDetails.png" width="20%" height="20%">
+<img src="/add_product.png" width="20%" height="20%">
+<img src="/edit_product.png" width="20%" height="20%">
+<img src="/Tracking.png" width="20%" height="20%">
