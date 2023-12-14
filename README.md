@@ -1,8 +1,8 @@
 # Flutter AR Furniture E-Commerce App
 
-Welcome to my Flutter-based Augmented Reality (AR) Furniture E-Commerce App for furniture shopping. This mobile application seamlessly combines the worlds of furniture shopping and augmented reality to provide users with an immersive and interactive shopping experience.
+Welcome to the Flutter-based Augmented Reality (AR) Furniture E-Commerce App for furniture shopping. This mobile application seamlessly combines the worlds of furniture shopping and augmented reality to provide users with an immersive and interactive shopping experience.
 
-**NOTE:** I developed this project for Gemona West Lifestyle, the interior design firm where I currently work. It will be available on the Play Store by January. Once it is finally on the Play Store, I'll add the link here for you all to download and shop in 3D.
+**NOTE:** I developed this project for Gemona West Lifestyle, the interior design firm where I currently work. It will be available on the Play Store by January and the link will be updated here for you all to download and shop in 3D!.
 
 I am also working on creating a youtube channel where I'll teach people flutter and we'll create cool projects and flutter packages! together. The link will be added to all my repository README.md when it is up.  
 
@@ -12,26 +12,11 @@ I am also working on creating a youtube channel where I'll teach people flutter 
   - A robust and scalable backend built on Node.js, ensuring seamless communication with the MongoDB database for efficient data storage and retrieval. Check the backend repo at (https://github.com/Victor-Oluwa/lifestyle-backend.git) for instuctions on how to set up the backend.
 
 - **Firebase Push Notification:**
-  - Keep users engaged and informed with Firebase push notifications, delivering real-time updates and personalized messages. Follow the steps below to configure Firebase.
-
-    ### Firebase Configuration:
-
-    1. **Create a Firebase Project:**
-       - Go to the [Firebase Console](https://console.firebase.google.com/).
-       - Click on "Add Project" and follow the prompts to create a new Firebase project.
-
-    2. **Add Firebase to Your App:**
-       - For Android:
-         - Download `google-services.json` and place it in `android/app/`.
-       - For iOS:
-         - Download `GoogleService-Info.plist` and place it in `ios/Runner/`.
-
-    3. **Enable Firebase Services:**
-       - Enable services such as Authentication, Cloud Firestore, and Cloud Messaging in the Firebase Console.
-
+  - Keep users engaged and informed with Firebase push notifications, delivering real-time updates and personalized messages.
+    
 - **Augmented Reality Furniture View (Under Development):**
   - Experience the future of furniture shopping with our AR feature, allowing users to visualize furniture in their own space before making a purchase.
-  - This feature is still under development because the 3D models for the furniture are still being created.
+  - This feature is still under development because the 3D models for the furnitures are still being created.
 
 - **Interactive 3D Model View of Furniture** 
   - Immerse yourself in the future of furniture exploration, allowing for dynamic interaction with lifelike models before making informed purchase decisions
@@ -71,18 +56,27 @@ I am also working on creating a youtube channel where I'll teach people flutter 
 - **Payment Integration:**
   - Paystack
 
-## How to Use:
 
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/Victor-Oluwa/lifestyle.git
-   ```
+### 3D Model Preview
 
-2. **Setup Backend:**
-   - Follow the backend setup instructions above.
+<img src="/3d_preview.gif" width="30%" height="30%">
 
-3. **Configure Firebase:**
-   - Follow the Firebase configuration instructions above.
+### Some Screenshots
 
-4. **Run the App:**
-   - Open the project in Flutter and run the app on your preferred device or emulator.
+
+<img src="Home.png" width="20%" height="20%"> 
+<img src="/signUp.png" width="20%" height="20%">
+<img src="/category.png" width="20%" height="20%">
+<img src="/all_products.png" width="20%" height="20%">
+<img src="/Search.png" width="20%" height="20%">
+<img src="/Doc.png" width="20%" height="20%">
+<img src="/Cart.png" width="20%" height="20%">
+<img src="/notification.png" width="20%" height="20%">
+<img src="/AR.png" width="20%" height="20%">
+<img src="/productDetails.png" width="20%" height="20%">
+<img src="/add_product.png" width="20%" height="20%">
+<img src="/edit_product.png" width="20%" height="20%">
+<img src="/Tracking.png" width="20%" height="20%">
+
+
+Quick one, guys: Some improvements have been made to the UI, such as fixing inconsistent text colors and addressing other minor faults. I'm currently quite busy, but I'll update the screenshots as soon as possible.
