@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lifestyle/Common/widgets/utils.dart';
 import 'package:lifestyle/models-classes/product.dart';
 import 'package:lifestyle/routes-management/lifestyle_routes_names.dart';
 import 'package:get/get.dart' as x;
@@ -18,7 +19,11 @@ class ProductDetailsFunctions {
     return price.replaceAllMapped(reg, matchFunc);
   }
 
-  navigateToModelScreen(data) {
+  navigateToModelScreen(Product data) {
+    if (data.models[0] == '' || data.models[0].isEmpty) {
+      dropperMessage('Model Not Available',
+          'No 3D model file for this product. Update the app to the latest version and try again');
+    }
     x.Get.toNamed(LifestyleRouteName.modelRoute, arguments: data);
   }
 

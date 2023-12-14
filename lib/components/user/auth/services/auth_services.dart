@@ -142,31 +142,35 @@ class AuthServices {
   //Retrieve Token
   Future<String> retrieveToken() async {
     final secureStorage = ref.read(secureStorageProvider);
-    return await secureStorage.readSecureData(AppConstants.authToken) ??
-        'empty.token';
+    return await secureStorage.readSecureData(AppConstants.authToken) ?? '';
   }
 
   //Verify Token
   Future<bool> verifyToken() async {
-    final token = await retrieveToken();
-    if (token == '') {
-      log('Token is empty string');
-    }
-    log('Token is valid: $token');
-    Response tokenIsValid = await _dio.post(
-      '$uri/tokenIsValid',
-      options: Options(
-        contentType: Headers.jsonContentType,
-        headers: {AppConstants.authToken: token},
-      ),
-    );
-    if (tokenIsValid.statusCode == 200 || tokenIsValid.statusCode == 201) {
-      return tokenIsValid.data;
-    } else {
-      throw APIException(
-        message: tokenIsValid.data,
-        statusCode: tokenIsValid.statusCode ?? 404,
+    try {
+      final token = await retrieveToken();
+      if (token == '') {
+        log('Token is empty string');
+        return false;
+      }
+      log('Token is valid: $token');
+      Response tokenIsValid = await _dio.post(
+        '$uri/tokenIsValid',
+        options: Options(
+          contentType: Headers.jsonContentType,
+          headers: {AppConstants.authToken: token},
+        ),
       );
+      if (tokenIsValid.statusCode == 200 || tokenIsValid.statusCode == 201) {
+        return tokenIsValid.data;
+      } else {
+        throw APIException(
+          message: tokenIsValid.data,
+          statusCode: tokenIsValid.statusCode ?? 404,
+        );
+      }
+    } catch (e) {
+      return false;
     }
   }
 

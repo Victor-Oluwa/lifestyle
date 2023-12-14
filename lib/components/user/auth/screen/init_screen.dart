@@ -19,9 +19,10 @@ class InitScreen extends ConsumerStatefulWidget {
 class _InitScreenState extends ConsumerState<InitScreen> {
   @override
   void didChangeDependencies() {
-    log('message');
     ref.read(notificationFunctionProvider).uploadFcmToken();
     final authFunction = ref.watch(authFunctionsProvider(context));
+
+    log('message');
 
     authFunction.checkConnection().then((isConnected) {
       authFunction.usherUser.call(

@@ -165,6 +165,10 @@ class CartFunctions {
     // }
   }
 
+  String getProductPriceWithCommas(String price) {
+    return addCommas(price);
+  }
+
   String getSumWithComma() {
     double sum = 0;
     final userCart = getUserCartList();

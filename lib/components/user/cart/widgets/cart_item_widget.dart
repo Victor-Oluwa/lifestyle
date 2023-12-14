@@ -183,6 +183,7 @@ class _CartItemState extends ConsumerState<CartItemWidget> {
   }
 
   Column buildCartDetails(Product product) {
+    final cartFunction = ref.read(cartFunctionProvider);
     return Column(
       children: [
         Container(
@@ -204,7 +205,10 @@ class _CartItemState extends ConsumerState<CartItemWidget> {
           child: MediumText(
             color: Colors.white,
             maxLine: 1,
-            text: 'N${product.price}',
+            text:
+                '₦${cartFunction.getProductPriceWithCommas('${product.price}')}',
+
+            // text: 'N${product.price}',
             size: 16.sp,
           ),
         ),

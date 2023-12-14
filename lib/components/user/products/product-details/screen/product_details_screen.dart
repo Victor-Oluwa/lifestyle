@@ -8,6 +8,7 @@ import 'package:lifestyle/components/user/products/product-details/widgets/produ
 import 'package:lifestyle/components/user/products/product-details/widgets/product_image.dart';
 import 'package:lifestyle/components/user/products/product-details/widgets/product_name_and_price_widget.dart';
 import 'package:lifestyle/components/user/products/product-details/widgets/showmore_showless_button.dart';
+import 'package:lifestyle/components/user/products/product-details/widgets/three_d_view_button.dart';
 import 'package:lifestyle/models-classes/product.dart';
 import 'package:lifestyle/state/providers/actions/provider_operations.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -59,10 +60,10 @@ class _ProductDetailsScreenState extends ConsumerState<ProductDetailsScreen> {
                   Stack(
                     children: [
                       ProductImage(product: product),
-                      // ThreeDViewButton(ref: ref, product: product),
+                      ThreeDViewButton(ref: ref, product: product),
                     ],
                   ),
-                  ProductNameAndPrice(product: product),
+                  ProductNameAndPrice(product: product, ref: ref),
                   SizedBox(
                     height: 2.h,
                   ),
