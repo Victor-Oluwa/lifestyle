@@ -4,8 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
-import 'package:lifestyle/components/user/notification/screen/demo_noti.dart';
-import 'package:lifestyle/components/user/notification/screen/user_notification.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:lifestyle/routes-management/lifestyle_routes.dart';
@@ -23,14 +21,9 @@ Future main() async {
   );
 }
 
-class MyApp extends ConsumerStatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  @override
-  ConsumerState<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(
@@ -42,8 +35,6 @@ class _MyAppState extends ConsumerState<MyApp> {
           ),
           debugShowCheckedModeBanner: false,
           home: const InitScreen(),
-          // home: const DemoNoti(),
-
           getPages: getPages,
         );
       },

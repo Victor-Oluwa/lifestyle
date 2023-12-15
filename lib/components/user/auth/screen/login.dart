@@ -73,9 +73,7 @@ class _AuthSignInScreenState extends ConsumerState<LoginScreen> {
                   children: [
                     buildSignInText(),
                     buildSignInForm(),
-                    SizedBox(
-                      height: 5.h,
-                    ),
+                    SizedBox(height: 5.h),
                     buildSignInButton(),
                   ],
                 ),

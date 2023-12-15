@@ -26,7 +26,7 @@ class ReceiptButton extends StatelessWidget {
           child: Column(
             children: [
               Image.asset(
-                LifestyleAssetImages.whiteLogoImage,
+                LifestyleStrings.whiteLogoImage,
                 height: 7.h,
               ),
               const MediumText(

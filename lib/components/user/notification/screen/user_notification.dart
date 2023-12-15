@@ -25,7 +25,7 @@ class UserNotification extends StatelessWidget {
                   child: Image(
                       height: 30.h,
                       image: const AssetImage(
-                        LifestyleAssetImages.whiteLogoImage,
+                        LifestyleStrings.whiteLogoImage,
                       )),
                 ),
                 SizedBox(height: 2.h),

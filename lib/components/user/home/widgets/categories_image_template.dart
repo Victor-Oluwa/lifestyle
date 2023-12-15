@@ -5,8 +5,6 @@ import 'package:lifestyle/Common/widgets/global_variables.dart';
 import 'package:lifestyle/routes-management/lifestyle_routes_names.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../../../state/providers/actions/provider_operations.dart';
-
 class CategoriesImageTemplate extends ConsumerWidget {
   const CategoriesImageTemplate({
     Key? key,
@@ -27,7 +25,6 @@ class CategoriesImageTemplate extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notificationFunction = ref.read(notificationFunctionProvider);
     return GestureDetector(
       onTap: (() {
         navigateToCategoryPage(context, GlobalVariables.categoryTitles[index]);

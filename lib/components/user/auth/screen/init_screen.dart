@@ -45,7 +45,7 @@ class _InitScreenState extends ConsumerState<InitScreen> {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-              LifestyleAssetImages.whiteLogoImage,
+              LifestyleStrings.whiteLogoImage,
             ),
           ),
         ),

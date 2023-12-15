@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle/components/admin/add_product/provider/add_product_provider.dart';
-import 'package:lifestyle/state/providers/provider_model/user_provider.dart';
 
 import '../../../../Common/widgets/processing_indicator.dart';
 import '../../../../Common/widgets/utils.dart';

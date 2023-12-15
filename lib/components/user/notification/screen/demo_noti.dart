@@ -1,7 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/Material.dart';
 import 'package:lifestyle/Common/colors/lifestyle_colors.dart';
 import 'package:lifestyle/Common/widgets/app_constants.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:socket_io_client/socket_io_client.dart' as io;
 
 class DemoNoti extends StatefulWidget {
   const DemoNoti({super.key});
@@ -11,16 +13,16 @@ class DemoNoti extends StatefulWidget {
 }
 
 class _DemoNotiState extends State<DemoNoti> {
-  late IO.Socket socket;
+  late io.Socket socket;
   List<Map<String, dynamic>> notifications = [];
 
   @override
   void initState() {
     super.initState();
     socket =
-        IO.io(uri, IO.OptionBuilder().setTransports(['websocket']).build());
+        io.io(uri, io.OptionBuilder().setTransports(['websocket']).build());
     socket.on('notification', (data) {
-      print('Got the new notification here: $data');
+      log('Got the new notification here: $data');
       setState(() {
         notifications.add(data);
       });

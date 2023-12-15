@@ -100,11 +100,12 @@ class _AuthScreenState extends ConsumerState<SignUpScreen> {
                     IconButton(
                         onPressed: () {
                           x.Get.to(() => const PrivacyPolicy(),
-                              arguments: privacyPolicyAssetPath);
+                              arguments:
+                                  LifestyleStrings.privacyPolicyAssetPath);
                         },
                         icon: const MediumText(
                             decoration: TextDecoration.underline,
-                            text: 'Terms and Privacy Policy'))
+                            text: LifestyleStrings.termsAndPrivacy))
                   ],
                 ),
               ),

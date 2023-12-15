@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/Material.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lifestyle/Common/widgets/app_constants.dart';
 import 'package:lifestyle/Common/widgets/snackbar_messages.dart';
 import 'package:lifestyle/Common/widgets/utils.dart' as snack;
 import 'package:lifestyle/common/widgets/utils.dart';
@@ -13,6 +12,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../../../models-classes/order.dart';
 import '../../../../../../models-classes/user.dart';
+import '../../../../../Common/strings/strings.dart';
 
 class PaystackFunctions {
   final Ref ref;
@@ -23,7 +23,7 @@ class PaystackFunctions {
   Map<String, dynamic> initializePaymentResult = {};
 
   Charge charge = Charge();
-  final String _publicKey = kPaystackPublicKey;
+  final String _publicKey = LifestyleStrings.kPaystackPublicKey;
 
   startPaystark() async {
     await plugin.initialize(publicKey: _publicKey);

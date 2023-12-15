@@ -15,7 +15,6 @@ import 'package:lifestyle/components/admin/all-products/screen/all_products_scre
 import 'package:lifestyle/components/admin/update-products/screen/update_product.dart';
 
 import 'package:lifestyle/components/admin/order-details/screen/order_details_screen.dart';
-import '../components/admin/order-details/tracking/screen/order_tracking_screen.dart';
 import '../components/user/ar/screen/ar_view.dart';
 import '../components/user/auth/screen/login.dart';
 import '../components/user/auth/screen/signup.dart';

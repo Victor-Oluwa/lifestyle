@@ -23,7 +23,7 @@ class _DocumentsPageDropdownState extends State<DocumentsPageDropdown> {
         onSelected: (String result) {
           if (result == 'Policy') {
             Get.to(() => const PrivacyPolicy(),
-                arguments: privacyPolicyAssetPath);
+                arguments: LifestyleStrings.privacyPolicyAssetPath);
           }
           log('Selected: $result');
         },

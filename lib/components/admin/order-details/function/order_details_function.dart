@@ -49,7 +49,7 @@ class OrderDetailsFunctions {
   Future<void> printReceipt(order) async {
     final doc = ps.Document();
     final image = await imageFromAssetBundle(
-      LifestyleAssetImages.whiteLogoImage,
+      LifestyleStrings.whiteLogoImage,
     );
     doc.addPage(
       ps.Page(
@@ -59,7 +59,7 @@ class OrderDetailsFunctions {
         },
       ),
     );
-    await Printing.layoutPdf(onLayout: (PdfPageFormat) => doc.save());
+    await Printing.layoutPdf(onLayout: (pdfPageFormat) => doc.save());
   }
 
   ps.Center buildPrintableReciept({required image, required order}) {

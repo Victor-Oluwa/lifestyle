@@ -4,8 +4,6 @@ import 'package:flutter/Material.dart';
 import 'package:lifestyle/components/admin/order-details/function/order_details_function.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'package:lifestyle/components/admin/orders/functions/order_functions.dart';
-
 import '../../../../Common/colors/lifestyle_colors.dart';
 import '../../../../Common/strings/strings.dart';
 import '../../../../Common/widgets/medium_text.dart';
@@ -45,7 +43,7 @@ class ReceiptViewWidget extends StatelessWidget {
               child: Column(
                 children: [
                   Image.asset(
-                    LifestyleAssetImages.whiteLogoImage,
+                    LifestyleStrings.whiteLogoImage,
                     height: 7.h,
                   ),
                   const MediumText(

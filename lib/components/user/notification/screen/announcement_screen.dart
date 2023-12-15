@@ -4,7 +4,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
-import 'package:lifestyle/Common/widgets/utils.dart';
+import 'package:lifestyle/Common/strings/strings.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:lifestyle/Common/colors/lifestyle_colors.dart';
@@ -81,14 +81,12 @@ class _AnnouncementState extends ConsumerState<Announcement> {
         backgroundColor: Colors.black,
         elevation: 0,
         title: const MediumText(
-            color: LifestyleColors.white, text: 'ANNOUNCEMENT'),
+            color: LifestyleColors.white, text: LifestyleStrings.announcement),
         actions: [
           Column(
             children: [
               IconButton(
                   onPressed: () async {
-                    print('Notification list: $notifications');
-
                     final image = ref.read(notificationImageProvider);
                     final action = notificationFunction.getNotificationAction(
                         selectedAction: selectedAction, ref: ref);
@@ -102,9 +100,9 @@ class _AnnouncementState extends ConsumerState<Announcement> {
                   },
                   icon: const Icon(Icons.send)),
               const MediumText(
-                text: 'Send',
+                text: LifestyleStrings.announcementSendText,
                 color: LifestyleColors.white,
-              )
+              ),
             ],
           )
         ],

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lifestyle/common/widgets/medium_text.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../../../Common/strings/strings.dart';
 import '../../../../Common/widgets/app_constants.dart';
 import '../../../../routes-management/lifestyle_routes_names.dart';
 import '../widgets/dropdown_widget.dart';
@@ -15,8 +16,8 @@ class DocumentsView extends StatefulWidget {
 }
 
 class _DocumentsViewState extends State<DocumentsView> {
-  final String _brochureUrl = kBrochureUrl;
-  final String _profileDocUrl = kProfileDocUrl;
+  final String _brochureUrl = LifestyleStrings.brochureUrl;
+  final String _profileDocUrl = LifestyleStrings.profileDocUrl;
 
   navigateToBrowser(url) {
     Get.toNamed(LifestyleRouteName.browserRoute, arguments: url);
