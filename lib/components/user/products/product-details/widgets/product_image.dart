@@ -1,7 +1,8 @@
 import 'package:flutter/Material.dart';
-import 'package:lifestyle/common/widgets/cache_image.dart';
 import 'package:lifestyle/models-classes/product.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
+import '../../../../../Common/widgets/cache_image.dart';
 
 class ProductImage extends StatelessWidget {
   const ProductImage({
@@ -19,7 +20,7 @@ class ProductImage extends StatelessWidget {
       margin: EdgeInsets.only(left: 3.w, right: 3.w, top: 1.5.h),
       decoration: const BoxDecoration(),
       child: ClipRRect(
-        child: cacheImage(product.images[0]),
+        child: networkImageCacher(product.images[0]),
       ),
     );
   }

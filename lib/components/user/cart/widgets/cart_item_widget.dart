@@ -11,12 +11,13 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:lifestyle/Common/colors/lifestyle_colors.dart';
 import 'package:lifestyle/Common/widgets/app_constants.dart';
-import 'package:lifestyle/Common/widgets/cache_image.dart';
+
 import 'package:lifestyle/components/user/cart/functions/cart_functions.dart';
 import 'package:lifestyle/models-classes/cart.dart';
 import 'package:lifestyle/state/providers/actions/provider_operations.dart';
 
 import '../../../../../models-classes/product.dart';
+import '../../../../Common/widgets/cache_image.dart';
 import '../../../../Common/widgets/medium_text.dart';
 
 class CartItemWidget extends ConsumerStatefulWidget {
@@ -220,7 +221,7 @@ class _CartItemState extends ConsumerState<CartItemWidget> {
       width: 13.h,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(5.sp),
-        child: cacheImage(product.images[0]),
+        child: networkImageCacher(product.images[0]),
       ),
     );
   }

@@ -6,10 +6,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lifestyle/Common/widgets/app_constants.dart';
 import 'package:lifestyle/components/user/home/screens/home.dart';
 import 'package:lifestyle/Common/widgets/custom_icon0_icons.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import '../../../../Common/colors/lifestyle_colors.dart';
 import '../../../../state/providers/actions/provider_operations.dart';
 import '../../Documents/screens/document_view.dart';
 import '../../ar/screen/ar_blank_page.dart';
@@ -25,13 +25,15 @@ class TabPage extends ConsumerStatefulWidget {
 
 class _TabPageState extends ConsumerState<TabPage> {
   @override
-  void initState() {
+  void didChangeDependencies() {
     final NotificationFunction notificationFunction =
         ref.read(notificationFunctionProvider);
-    notificationFunction.initNotification();
     final paystackFunction = ref.read(paystackFunctionsProvider);
+
+    notificationFunction.initNotification();
     paystackFunction.startPaystark();
-    super.initState();
+
+    super.didChangeDependencies();
   }
 
   List pages = [
@@ -53,7 +55,7 @@ class _TabPageState extends ConsumerState<TabPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      backgroundColor: lightTaupe,
+      backgroundColor: LifestyleColors.kTaupeBackground,
       body: pages[currentIndex],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(

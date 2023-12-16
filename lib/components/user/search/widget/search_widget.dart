@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle/Common/colors/lifestyle_colors.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-
 class SearchWidget extends StatelessWidget {
   const SearchWidget({
     Key? key,

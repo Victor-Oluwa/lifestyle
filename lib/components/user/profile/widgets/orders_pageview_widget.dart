@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../Common/colors/lifestyle_colors.dart';
-import '../../../../Common/widgets/cache_image.dart';
+import '../../../../../Common/widgets/cache_image.dart';
+
 import '../../../../models-classes/order.dart';
 import '../function/profile_functions.dart';
 
@@ -46,7 +47,8 @@ class OrdersPageviewWidget extends StatelessWidget {
                   },
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(12.sp),
-                      child: cacheImage(orders[index].products[0].images[0])),
+                      child: networkImageCacher(
+                          orders[index].products[0].images[0])),
                 ),
               ),
             );

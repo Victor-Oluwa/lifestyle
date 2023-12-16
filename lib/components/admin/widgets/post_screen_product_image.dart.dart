@@ -21,7 +21,7 @@ class ProductImageWidget extends StatelessWidget {
       width: 20.h,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(5.sp),
-        child: cacheImage(product.images[0]),
+        child: networkImageCacher(product.images[0]),
       ),
     );
   }

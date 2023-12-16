@@ -16,6 +16,7 @@ import 'package:lifestyle/models-classes/user.dart';
 import 'package:lifestyle/routes-management/lifestyle_routes_names.dart';
 
 import '../../../../Common/widgets/cache_image.dart';
+
 import '../../../../Common/widgets/loading_indicator.dart';
 import '../../../../state/providers/actions/provider_operations.dart';
 import '../../../../state/providers/provider_model/user_provider.dart';
@@ -75,7 +76,7 @@ class ProfileFunctions {
         fit: BoxFit.cover,
       );
     }
-    return cacheImage(
+    return networkImageCacher(
       getuserPic(),
     );
   }

@@ -15,7 +15,6 @@ import 'package:lifestyle/components/admin/all-products/screen/all_products_scre
 import 'package:lifestyle/components/admin/update-products/screen/update_product.dart';
 
 import 'package:lifestyle/components/admin/order-details/screen/order_details_screen.dart';
-import '../components/user/ar/screen/ar_view.dart';
 import '../components/user/auth/screen/login.dart';
 import '../components/user/auth/screen/signup.dart';
 import '../components/user/search/screen/search_screen.dart';
@@ -47,11 +46,11 @@ List<GetPage> getPages = [
       page: () => const SearchScreen(),
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)),
-  GetPage(
-      name: LifestyleRouteName.categotyRoute,
-      page: () => const ProductsViewScreen(),
-      transition: Transition.fadeIn,
-      transitionDuration: const Duration(milliseconds: 500)),
+  // GetPage(
+  //     name: LifestyleRouteName.categotyRoute,
+  //     page: () => const ProductsViewScreen(),
+  //     transition: Transition.fadeIn,
+  //     transitionDuration: const Duration(milliseconds: 500)),
   GetPage(
       name: LifestyleRouteName.orderDetailsRoute,
       page: () => const OrderDetailsScreen(),
@@ -62,12 +61,12 @@ List<GetPage> getPages = [
       page: () => const ProductDetailsScreen(),
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500)),
-  GetPage(
-    name: LifestyleRouteName.arRoute,
-    page: () => const ArView(),
-    transition: Transition.fadeIn,
-    transitionDuration: const Duration(milliseconds: 500),
-  ),
+  // GetPage(
+  //   name: LifestyleRouteName.arRoute,
+  //   page: () => const ArView(),
+  //   transition: Transition.fadeIn,
+  //   transitionDuration: const Duration(milliseconds: 500),
+  // ),
   GetPage(
     name: LifestyleRouteName.addProductRoute,
     page: () => const AddProductScreen(),

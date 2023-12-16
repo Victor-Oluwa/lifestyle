@@ -10,16 +10,11 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../../Common/widgets/medium_text.dart';
 import '../../../../state/providers/actions/provider_operations.dart';
 
-class AllProductsScreen extends ConsumerStatefulWidget {
+class AllProductsScreen extends ConsumerWidget {
   const AllProductsScreen({super.key});
 
   @override
-  ConsumerState<AllProductsScreen> createState() => _PostScreenState();
-}
-
-class _PostScreenState extends ConsumerState<AllProductsScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final allProductsFunction = ref.read(allProductsFunctionProvider);
     return Scaffold(
       backgroundColor: lightTaupe,
@@ -51,8 +46,8 @@ class _PostScreenState extends ConsumerState<AllProductsScreen> {
 
   IconButton buildSwitchToUserButton() {
     return IconButton(
-        onPressed: () {
-          Get.offAll(() => const TabPage());
+        onPressed: () async {
+          await Get.offAll(() => const TabPage());
         },
         icon: const Icon(Icons.switch_account));
   }

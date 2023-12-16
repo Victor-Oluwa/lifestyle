@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lifestyle/Common/colors/lifestyle_colors.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'medium_text.dart';
@@ -16,21 +17,17 @@ final customCacheManager = CacheManager(
   ),
 );
 
-CachedNetworkImage cacheImage(String url) {
+CachedNetworkImage networkImageCacher(
+  String url, {
+  Color placeHolderColor = LifestyleColors.white,
+}) {
   return CachedNetworkImage(
     fit: BoxFit.cover,
     cacheManager: customCacheManager,
     imageUrl: url,
-    placeholder: (context, url) => Container(
-      alignment: Alignment.center,
-      height: 30.h,
-      width: 30.h,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15.sp),
-      ),
-      child: const FaIcon(
-        FontAwesomeIcons.barsProgress,
-      ),
+    placeholder: (context, url) => FaIcon(
+      color: placeHolderColor,
+      FontAwesomeIcons.barsProgress,
     ),
     errorWidget: (context, url, error) => const Center(
       child: MediumText(text: 'Failed to load image'),
