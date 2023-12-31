@@ -20,6 +20,8 @@ class FloatingTextEditor extends StatefulWidget {
     this.materialColor = LifestyleColors.kTaupeBackground,
     this.readOnly = false,
     this.onFieldSubmitted,
+    this.maxLine,
+    this.onChanged,
   }) : super(key: key);
   final FocusNode focusNode;
   final bool obscureText;
@@ -31,6 +33,8 @@ class FloatingTextEditor extends StatefulWidget {
   final Color? fillColor;
   final Color? materialColor;
   final bool readOnly;
+  final int? maxLine;
+  final void Function(String)? onChanged;
   final void Function(String)? onFieldSubmitted;
 
   @override
@@ -43,14 +47,16 @@ class _FloatingTextEditorState extends State<FloatingTextEditor> {
     return Material(
       animationDuration: const Duration(seconds: 1),
       color: LifestyleColors.kTaupeBackground,
-      shadowColor: Colors.grey,
+      shadowColor: LifestyleColors.black,
       borderRadius: BorderRadius.circular(8.sp),
-      elevation: widget.focusNode.hasFocus ? 10.sp : 5.sp,
+      elevation: widget.focusNode.hasFocus ? 10.sp : 7.sp,
       child: AnimatedContainer(
         duration: const Duration(seconds: 1),
-        height: 8.5.h,
-        padding: EdgeInsets.only(top: 16.sp, bottom: 14.sp, left: 2.w),
+        height: null,
+        padding: EdgeInsets.only(top: 16.sp, bottom: 0.sp, left: 2.w),
         child: TextFormField(
+          onChanged: widget.onChanged,
+          maxLines: widget.maxLine,
           readOnly: widget.readOnly,
           focusNode: widget.focusNode,
           validator: widget.validate,

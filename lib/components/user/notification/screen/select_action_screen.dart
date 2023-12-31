@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
@@ -15,10 +16,10 @@ final launchUrlActionProvider = StateProvider((ref) => false);
 final navigateToScreenActionProvider = StateProvider((ref) => false);
 
 final launchUrlValueProvider = StateProvider((ref) => '');
-final navigateToScreenValueProvider = StateProvider((ref) => '');
+final navigateValueProvider = StateProvider((ref) => '');
 
-final selectedActionProvider = StateProvider((ref) => 'Not set');
-final notificationImageProvider = StateProvider((ref) => File('null'));
+final selectedActionProvider = StateProvider((ref) => 'No-Action');
+final selectedActionValueProvider = StateProvider((ref) => 'No-Data');
 
 class SelectActionScreen extends ConsumerStatefulWidget {
   const SelectActionScreen({super.key});
@@ -63,6 +64,9 @@ class _SelectActionScreenState extends ConsumerState<SelectActionScreen> {
     final noCallToAction = ref.watch(noCallToActionProvider);
     final launchUrl = ref.watch(launchUrlActionProvider);
     final navigateAction = ref.watch(navigateToScreenActionProvider);
+
+    final navigateActionValue = ref.watch(navigateValueProvider);
+    final launchUrlActionValue = ref.watch(launchUrlValueProvider);
     return Scaffold(
       backgroundColor: LifestyleColors.kTaupeBackground,
       body: SafeArea(
@@ -83,17 +87,17 @@ class _SelectActionScreenState extends ConsumerState<SelectActionScreen> {
                       padding: EdgeInsets.all(1.h),
                       child: Column(
                         children: [
-                          buildNavigateAction(
-                              noCallToAction: noCallToAction,
-                              launchUrlAction: launchUrl,
-                              screenList: screenList,
-                              navigateAction: navigateAction),
-                          SizedBox(height: 6.h),
                           buildLaunchUrlAction(
                             navigateActionProvider: navigateAction,
                             noCallToAction: noCallToAction,
                             launchUrlAction: launchUrl,
                           ),
+                          SizedBox(height: 6.h),
+                          buildNavigateAction(
+                              noCallToAction: noCallToAction,
+                              launchUrlAction: launchUrl,
+                              screenList: screenList,
+                              navigateAction: navigateAction),
                           SizedBox(height: 6.h),
                           noAction(
                             launchUrlAction: launchUrl,
@@ -114,23 +118,18 @@ class _SelectActionScreenState extends ConsumerState<SelectActionScreen> {
               alignment: Alignment.bottomCenter,
               child: IconButton(
                 onPressed: () {
-                  final navigateToScreenValue =
-                      ref.read(navigateToScreenValueProvider);
-                  final launchUrlValue = ref.read(launchUrlValueProvider);
-                  if (launchUrl && urlController.text.isNotEmpty) {
+                  if (launchUrl == true && urlController.text.isNotEmpty) {
                     ref.read(launchUrlValueProvider.notifier).state =
                         urlController.text.trim();
-                  }
-
-                  if (noCallToAction) {
-                    ref.invalidate(navigateToScreenValueProvider);
+                  } else if (noCallToAction == true) {
+                    ref.invalidate(navigateValueProvider);
                     ref.invalidate(launchUrlValueProvider);
                   }
 
                   List<Map<String, dynamic>> actionOptions = [
-                    {'Navigate': ref.read(navigateToScreenActionProvider)},
-                    {'Launch Url': ref.read(launchUrlActionProvider)},
-                    {'No call to action': ref.read(noCallToActionProvider)}
+                    {'Navigate': navigateAction},
+                    {'Launch-Url': launchUrl},
+                    {'No-Action': noCallToAction}
                   ];
                   try {
                     final selectedAction = actionOptions
@@ -140,25 +139,36 @@ class _SelectActionScreenState extends ConsumerState<SelectActionScreen> {
                         .first;
 
                     if (selectedAction == 'Navigate' &&
-                        navigateToScreenValue.isNotEmpty) {
+                        navigateActionValue.isNotEmpty) {
                       ref.read(selectedActionProvider.notifier).state =
                           selectedAction;
+
+                      ref.read(selectedActionValueProvider.notifier).state =
+                          navigateActionValue;
+
+                      log(navigateActionValue);
                     }
 
-                    if (selectedAction == 'Launch Url' &&
-                        launchUrlValue.isNotEmpty) {
+                    if (selectedAction == 'Launch-Url' &&
+                        launchUrlActionValue.isNotEmpty) {
                       ref.read(selectedActionProvider.notifier).state =
                           selectedAction;
+
+                      ref.read(selectedActionValueProvider.notifier).state =
+                          launchUrlActionValue;
+
+                      log(launchUrlActionValue);
                     }
 
-                    if (selectedAction == 'No call to action') {
-                      ref.read(selectedActionProvider.notifier).state =
-                          selectedAction;
+                    if (selectedAction == 'No-Action') {
+                      ref.invalidate(selectedActionProvider);
+                      ref.invalidate(selectedActionValueProvider);
                     }
                   } catch (e) {
-                    ref.invalidate(selectedActionProvider);
-                    ref.invalidate(navigateToScreenValueProvider);
+                    ref.invalidate(navigateValueProvider);
                     ref.invalidate(launchUrlValueProvider);
+                    ref.invalidate(selectedActionProvider);
+                    ref.invalidate(selectedActionValueProvider);
                   }
                 },
                 icon: Container(
@@ -201,10 +211,10 @@ class _SelectActionScreenState extends ConsumerState<SelectActionScreen> {
                       ref.invalidate(launchUrlActionProvider);
 
                       return;
+                    } else {
+                      ref.read(navigateToScreenActionProvider.notifier).state =
+                          false;
                     }
-
-                    ref.read(navigateToScreenActionProvider.notifier).state =
-                        false;
                   },
                   icon: navigateAction
                       ? const Icon(Icons.check_box)
@@ -219,13 +229,12 @@ class _SelectActionScreenState extends ConsumerState<SelectActionScreen> {
             child: CustomDropdownWidget(
               screenList: screenList,
               onChanged: (value) {
-                if (navigateAction) {
-                  ref.read(navigateToScreenValueProvider.notifier).state =
-                      value;
+                if (navigateAction == true) {
+                  ref.read(navigateValueProvider.notifier).state = value;
                   return;
                 }
 
-                ref.invalidate(navigateToScreenValueProvider);
+                ref.invalidate(navigateValueProvider);
               },
             ),
           )
@@ -256,8 +265,9 @@ class _SelectActionScreenState extends ConsumerState<SelectActionScreen> {
                       ref.invalidate(navigateToScreenActionProvider);
 
                       return;
+                    } else {
+                      ref.read(launchUrlActionProvider.notifier).state = false;
                     }
-                    ref.read(launchUrlActionProvider.notifier).state = false;
                   },
                   icon: launchUrlAction
                       ? const Icon(Icons.check_box)
@@ -270,17 +280,23 @@ class _SelectActionScreenState extends ConsumerState<SelectActionScreen> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 1.h),
             child: FloatingTextEditor(
+              onChanged: (value) {
+                if (launchUrlAction == true) {
+                  ref.read(launchUrlValueProvider.notifier).state =
+                      value.trim();
+                }
+                // ref.invalidate(launchUrlValueProvider);
+              },
               focusNode: urlFocusNode,
               readOnly: !launchUrlAction,
               controller: urlController,
               label: const MediumText(text: 'Enter URL'),
               onFieldSubmitted: (value) {
-                if (launchUrlAction) {
+                if (launchUrlAction == true) {
                   ref.read(launchUrlValueProvider.notifier).state =
                       value.trim();
-                  return;
                 }
-                ref.invalidate(launchUrlValueProvider);
+                // ref.invalidate(launchUrlValueProvider);
               },
             ),
           )
@@ -306,8 +322,9 @@ class _SelectActionScreenState extends ConsumerState<SelectActionScreen> {
                 ref.invalidate(navigateToScreenActionProvider);
                 ref.invalidate(launchUrlActionProvider);
                 return;
+              } else {
+                ref.read(noCallToActionProvider.notifier).state = false;
               }
-              ref.read(noCallToActionProvider.notifier).state = false;
             },
             icon: noCallToAction == true
                 ? const Icon(Icons.check_box)

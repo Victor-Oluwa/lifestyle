@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../function/profile_functions.dart';
 
-class OrderPageViewWidget extends StatelessWidget {
-  const OrderPageViewWidget({
+class OrderPageView extends StatelessWidget {
+  const OrderPageView({
     Key? key,
     required this.profileFunctions,
     required this.ref,

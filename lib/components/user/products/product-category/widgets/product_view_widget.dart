@@ -1,10 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
 import 'package:lifestyle/Common/fonts/lifestyle_fonts.dart';
+import 'package:neumorphic_ui/neumorphic_ui.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:lifestyle/Common/colors/lifestyle_colors.dart';
@@ -15,6 +18,7 @@ import 'package:lifestyle/components/user/products/product-category/widgets/para
 import 'package:lifestyle/models-classes/product.dart';
 
 import '../../../../../Common/widgets/cache_image.dart';
+import '../../../../../core/utils/screen_utils.dart';
 import '../../../../../models-classes/category.dart';
 
 class CategoryProductItem extends ConsumerWidget {
@@ -39,78 +43,119 @@ class CategoryProductItem extends ConsumerWidget {
     return Hero(
       tag: category.id,
       child: Stack(
-        alignment: Alignment.center,
+        clipBehavior: Clip.none,
+
+        // alignment: Alignment.center,
         fit: StackFit.expand,
         children: [
           ParallaxImageCard(imageUrl: category.imageUrl),
-          ClipRRect(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaY: sigma, sigmaX: sigma),
-              child: const ColoredBox(color: Colors.transparent),
-            ),
-          ),
+          buildBackdrop(sigma),
+          // Container(color: LifestyleColors.kTaupeBackground),
           // --------------------------------------------
           // Animated output elements
           // --------------------------------------------
-
-          FadeTransition(
-            opacity: Tween<double>(begin: 1, end: 0).animate(animation),
-            child: Stack(children: [
-              Transform.translate(
-                offset: Offset(-outDx, 0),
-                child: VerticalRoomTitle(
-                  category: category,
-                ),
-              ),
-              // Transform.translate(
-              //   offset: Offset(outDx, outDy),
-              //   child: const CameraIconButton(),
-              // ),
-              // Transform.translate(
-              //   offset: Offset(0, outDy),
-              //   child: const AnimatedUpwardArrows(),
-              // ),
-            ]),
-          ),
+          buildVerticalCategoryName(outDx),
           // --------------------------------------------
-          // Animated room controls
+          // Animated Product Grid
           // --------------------------------------------
 
-          FadeTransition(
-            opacity: animation,
-            child: Container(
-              transform:
-                  Matrix4.translationValues(0, -200 * (1 - animation.value), 0),
-              padding: EdgeInsets.only(
-                  top: topPadding + 12, left: 1.h, right: 1.h, bottom: 1.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  // Text(
-                  //   'SOFA'.replaceAll(' ', '\n'),
-                  //   textAlign: TextAlign.center,
-                  //   style: TextStyle(),
-                  // ),
-                  Expanded(
-                    child: RefreshIndicator(
-                      onRefresh: () {
-                        return Future.delayed(const Duration(seconds: 3)).then(
-                            (value) =>
-                                ref.invalidate(getCategoryProductProvider));
+          buildProductGridView(ref),
+        ],
+      ),
+    );
+  }
+
+  FadeTransition buildProductGridView(WidgetRef ref) {
+    return FadeTransition(
+      opacity: animation,
+      child: Container(
+        color: LifestyleColors.kTaupeBackground,
+        transform:
+            Matrix4.translationValues(0, -200 * (1 - animation.value), 0),
+        padding: EdgeInsets.only(
+            top: topPadding + 0.h, left: 1.h, right: 1.h, bottom: 0.h),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: ScreenUtils.h(0.05)),
+              child: Container(
+                width: double.infinity,
+                height: ScreenUtils.h(0.07),
+                color: LifestyleColors.transparent,
+                child: Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Get.back();
                       },
-                      child: CategoryProductsGridView(
-                        animation: animation,
-                        category: category,
-                        data: data,
-                        ref: ref,
+                      child: Icon(
+                        Icons.arrow_back_rounded,
+                        color: LifestyleColors.productBackground,
                       ),
                     ),
-                  ),
-                ],
+                    SizedBox(width: ScreenUtils.h(0.05)),
+                    MediumText(
+                      size: ScreenUtils.w(0.06),
+                      text: 'SOFA',
+                      color: LifestyleColors.productBackground,
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+            // Padding(
+            //   padding: EdgeInsets.only(top: 0.h, bottom: 3.h),
+            //   child: Neumorphic(
+            //     padding: EdgeInsets.all(15.sp),
+            //     style: const NeumorphicStyle(
+            //       depth: -1,
+            //       color: LifestyleColors.kTaupeBackground,
+            //     ),
+            //     child: NeumorphicText(
+            //       textStyle: NeumorphicTextStyle(
+            //         fontFamily: LifestyleFonts.kComorantBold,
+            //         fontSize: 20.sp,
+            //       ),
+            //       style: const NeumorphicStyle(
+            //         depth: 1,
+            //         intensity: 500,
+            //         color: LifestyleColors.kTaupeBackground,
+            //       ),
+            //       data[0].category.toUpperCase(),
+            //     ),
+            //   ),
+            // ),
+            Expanded(
+              child: CategoryProductsGridView(
+                animation: animation,
+                category: category,
+                data: data,
+                ref: ref,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  FadeTransition buildVerticalCategoryName(double outDx) {
+    return FadeTransition(
+      opacity: Tween<double>(begin: 5, end: 0).animate(animation),
+      child: Transform.translate(
+        offset: Offset(-outDx, 0),
+        child: VerticalCategoryName(
+          category: category,
+        ),
+      ),
+    );
+  }
+
+  ClipRRect buildBackdrop(double sigma) {
+    return ClipRRect(
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaY: sigma, sigmaX: sigma),
+        child: const ColoredBox(color: Colors.transparent),
       ),
     );
   }
@@ -131,84 +176,134 @@ class CategoryProductsGridView extends StatelessWidget {
   final Animation<double> animation;
   final ProductCategory category;
 
-  Animation<double> get _interval1 => CurvedAnimation(
-        parent: animation,
-        curve: const Interval(0.4, 1, curve: Curves.easeIn),
-      );
+  Animation<double> interval1(interval) {
+    return CurvedAnimation(
+      parent: animation,
+      curve: Interval(interval, 1, curve: Curves.easeIn),
+    );
+  }
 
-  Animation<double> get _interval2 => CurvedAnimation(
-        parent: animation,
-        curve: const Interval(0.6, 1, curve: Curves.easeIn),
-      );
+  // Animation<double> get _interval1 => CurvedAnimation(
+  //       parent: animation,
+  //       curve: const Interval(0.4, 1, curve: Curves.easeIn),
+  //     );
 
-  Animation<double> get _interval3 => CurvedAnimation(
-        parent: animation,
-        curve: const Interval(0.8, 1, curve: Curves.easeIn),
-      );
+  // Animation<double> get _interval2 => CurvedAnimation(
+  //       parent: animation,
+  //       curve: const Interval(0.6, 1, curve: Curves.easeIn),
+  //     );
+
+  // Animation<double> get _interval3 => CurvedAnimation(
+  //       parent: animation,
+  //       curve: const Interval(0.8, 1, curve: Curves.easeIn),
+  //     );
 
   @override
   Widget build(BuildContext context) {
-    return MasonryGridView.count(
-      physics: const BouncingScrollPhysics(),
-      itemCount: data.length,
-      crossAxisCount: 2,
-      mainAxisSpacing: 5,
-      cacheExtent: 100,
-      crossAxisSpacing: 5,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: (() {
-            ref
-                .read(productCategoriesFunctionProvider)
-                .goToProductDetailScreen(product: data[index]);
-          }),
-          child: SlideTransition(
-            position: Tween(
-              begin: const Offset(0, 2),
-              end: Offset.zero,
-            ).animate(_interval1),
-            child: FadeTransition(
-              opacity: _interval1,
-              child: Stack(
-                children: [
-                  Container(
-                    height: 40.h,
-                    width: 52.w,
-                    decoration: BoxDecoration(
-                      color: LifestyleColors.productBackground,
-                      borderRadius: BorderRadius.circular(5.sp),
-                    ),
-                    child: networkImageCacher(
-                      placeHolderColor: LifestyleColors.productBackground,
-                      data[index].images[0],
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 0.4.h,
-                    right: 1.5.w,
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: MediumText(
-                        text: data[index].name,
-                        size: 15.sp,
-                        font: comorant,
-                        color: Colors.black,
-                        // size: ,
-                      ),
-                    ),
-                  )
-                ],
+    return ShaderMask(
+      shaderCallback: (Rect rect) {
+        return const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            LifestyleColors.kTaupeBackground,
+            Colors.transparent,
+            Colors.transparent,
+            Colors.transparent,
+          ],
+          stops: [
+            0.0,
+            0.1,
+            0.9,
+            1.0
+          ], // 10% purple, 80% transparent, 10% purple
+        ).createShader(rect);
+      },
+      blendMode: BlendMode.dstOut,
+      child: GridView.builder(
+        padding: EdgeInsets.zero,
+        physics: const BouncingScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 0.7,
+            crossAxisSpacing: 0.5.h,
+            mainAxisSpacing: 0.5.h),
+        itemCount: data.length,
+        cacheExtent: 100,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: (() {
+              ref
+                  .read(productCategoriesFunctionProvider)
+                  .goToProductDetailScreen(product: data[index]);
+            }),
+            child: SlideTransition(
+              position: Tween(
+                begin: const Offset(0, 2),
+                end: Offset.zero,
+              ).animate(animation),
+              child: FadeTransition(
+                opacity: animation,
+                child: ProductImageCard(
+                  data: data,
+                  index: index,
+                ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
 
-class VerticalRoomTitle extends StatelessWidget {
-  const VerticalRoomTitle({
+class ProductImageCard extends StatelessWidget {
+  const ProductImageCard({
+    super.key,
+    required this.data,
+    required this.index,
+  });
+
+  final List<Product> data;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          height: 60.h,
+          width: 52.w,
+          decoration: BoxDecoration(
+            color: LifestyleColors.productBackground,
+            borderRadius: BorderRadius.circular(5.sp),
+          ),
+          child: networkImageCacher(
+            placeHolderColor: LifestyleColors.productBackground,
+            data[index].images[0],
+          ),
+        ),
+        Positioned(
+          bottom: 0.4.h,
+          right: 1.5.w,
+          child: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: MediumText(
+              text: data[index].name,
+              size: 15.sp,
+              font: comorant,
+              color: Colors.black,
+              // size: ,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class VerticalCategoryName extends StatelessWidget {
+  const VerticalCategoryName({
     required this.category,
     super.key,
   });

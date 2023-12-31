@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:neumorphic_ui/neumorphic_ui.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../Common/colors/lifestyle_colors.dart';
@@ -29,53 +30,52 @@ class _ProfileMainBodyState extends State<ProfileMainBody> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Stack(
-        alignment: Alignment.center,
+      child: Column(
         children: [
-          SizedBox.expand(
-            child: Container(
-              alignment: Alignment.bottomCenter,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SizedBox(
-                    height: 1.h,
-                  ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Padding(
-                      padding: EdgeInsets.only(right: 11.w),
-                      child: MediumText(
-                        font: LifestyleFonts.kComorantBold,
-                        text: 'Track your orders',
-                        size: 20.sp,
-                        color: LifestyleColors.kTaupeDarkened,
-                      ),
-                    ),
-                  ),
-                  const Divider(
-                    thickness: 1,
-                    color: LifestyleColors.kTaupeDarkened,
-                  ),
-                  SizedBox(
-                    height: 1.h,
-                  ),
-                  OrderPageViewWidget(
-                      ref: widget.ref,
-                      profileFunctions: widget.profileFunctions),
-                  SizedBox(
-                    height: 3.h,
-                  ),
-                ],
-              ),
+          SizedBox(
+            height: 5.h,
+          ),
+          Expanded(
+            // height: 30.h,
+            child: UserImageAndButtons(
+              user: widget.user,
+              profileFunctions: widget.profileFunctions,
             ),
           ),
-          UserImageAndSideIconWidget(
-            user: widget.user,
-            profileFunctions: widget.profileFunctions,
-          )
+
+          SizedBox(height: 4.h),
+
+          ordersText(),
+          SizedBox(
+            height: 25.h,
+            // margin: EdgeInsets.only(bottom: 4.h),
+            child: OrderPageView(
+                ref: widget.ref, profileFunctions: widget.profileFunctions),
+          ),
+          // SizedBox(height: 3.h),
         ],
       ),
+    );
+  }
+
+  Align ordersText() {
+    return Align(
+      alignment: Alignment.bottomRight,
+      child: Padding(
+          padding: EdgeInsets.only(right: 11.w),
+          child: NeumorphicText(
+              style: const NeumorphicStyle(
+                  shape: NeumorphicShape.concave,
+                  // border: NeumorphicBorder(width: 1),
+                  shadowLightColor: Colors.black26,
+                  intensity: 50,
+                  depth: 1,
+                  color: LifestyleColors.kTaupeBackground),
+              textStyle: NeumorphicTextStyle(
+                fontSize: 22.sp,
+                fontFamily: LifestyleFonts.kComorantBold,
+              ),
+              'ORDERS')),
     );
   }
 }

@@ -48,8 +48,8 @@ class ProductCategoryFuction {
     checkInternetConnection();
     final connected = ref.watch(isConnected);
     return buildView(
-      category: category,
       internet: connected,
+      category: category,
       animation: animation,
       topPadding: topPadding,
       ref: ref,

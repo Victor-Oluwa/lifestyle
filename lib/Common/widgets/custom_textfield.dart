@@ -17,6 +17,7 @@ class CustomTextField extends StatefulWidget {
     this.selection,
     this.textInputType,
     this.signInFormKey,
+    this.validator = fieldValidator,
   }) : super(key: key);
   final TextEditingController controller;
   final String label;
@@ -26,6 +27,7 @@ class CustomTextField extends StatefulWidget {
   final bool? selection;
   final TextInputType? textInputType;
   final Key? signInFormKey;
+  final String? Function(String?)? validator;
   // final Color? borderColor;
 
   @override
@@ -73,13 +75,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ),
         ),
       ),
-      validator: (val) {
-        if (val == null || val.isEmpty) {
-          return 'This field cannot be empty';
-        }
-        return null;
-      },
+      validator: widget.validator,
       maxLines: widget.maxLines,
     );
   }
+}
+
+String? fieldValidator(String? val) {
+  if (val == null || val.isEmpty) {
+    return 'This field cannot be empty';
+  }
+  return null;
 }

@@ -35,8 +35,8 @@ class Product {
             inCart: 0,
             price: 0.0,
             category: 'category.empty',
-            images: [],
-            models: [],
+            images: [imageUrl],
+            models: [imageUrl],
             createdAt: 'createdAt.empty',
             status: 'status.empty',
             id: 'id.empty');
@@ -78,3 +78,6 @@ class Product {
   factory Product.fromJson(String source) =>
       Product.fromMap(json.decode(source));
 }
+
+final imageUrl =
+    'https://firebasestorage.googleapis.com/v0/b/lifestyle-ar-app.appspot.com/o/ALEXANDRIA%2Fimage%2FALEXANDRIA?alt=media&token=1310d999-1ea9-43b5-8655-41aaa7012302';

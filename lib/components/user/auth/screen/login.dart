@@ -169,6 +169,7 @@ class _AuthSignInScreenState extends ConsumerState<LoginScreen> {
 
   Widget buildPasswordTextEditor() {
     return FloatingTextEditor(
+      maxLine: 1,
       focusNode: passwordFocusNode,
       controller: _passwordController,
       label: const MediumText(

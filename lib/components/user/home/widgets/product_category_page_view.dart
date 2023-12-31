@@ -1,11 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/Material.dart';
+import 'package:get/get.dart';
 import 'package:lifestyle/components/user/products/product-category/screen/product_view_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:lifestyle/Common/strings/strings.dart';
-import 'package:lifestyle/components/user/home/widgets/categories_image_template.dart';
+import 'package:lifestyle/components/user/home/widgets/category_card.dart';
 
 import '../../../../models-classes/category.dart';
 
@@ -46,8 +47,8 @@ class CategoriesWidget extends StatelessWidget {
                       final category = ProductCategory.values[index];
                       return AnimatedContainer(
                         duration: kThemeAnimationDuration,
-                        curve: Curves.fastOutSlowIn,
-                        transform: _getOutTranslate(percent, selected, index),
+                        curve: Curves.bounceIn,
+                        // transform: _getOutTranslate(percent, selected, index),
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: CategoryCard(
                           category: category,
@@ -64,14 +65,13 @@ class CategoriesWidget extends StatelessWidget {
                                 pageBuilder: (_, animation, __) =>
                                     FadeTransition(
                                   opacity: animation,
-                                  child: ProductsViewScreen(
+                                  child: CategoryProductsScreen(
                                     category: category,
                                   ),
                                 ),
                               ),
                             );
-                            roomSelectorNotifier.value = -1;
-                            // }
+                            // roomSelectorNotifier.value = -1;
                           },
                         ),
                       );

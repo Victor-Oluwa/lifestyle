@@ -2,6 +2,8 @@
 import 'package:flutter/Material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle/Common/colors/lifestyle_colors.dart';
+import 'package:lifestyle/Common/fonts/lifestyle_fonts.dart';
+import 'package:neumorphic_ui/neumorphic_ui.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class SearchWidget extends StatelessWidget {
@@ -27,32 +29,40 @@ class SearchWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            child: Material(
-              color: LifestyleColors.kTaupeDark,
-              type: MaterialType.card,
-              borderRadius: BorderRadius.circular(5.sp),
-              elevation: 0,
-              child: TextFormField(
-                controller: controller,
-                onFieldSubmitted: submmit,
-                decoration: InputDecoration(
-                  prefixIcon: Padding(
-                    padding: EdgeInsets.only(
-                      left: 1.w,
-                    ),
-                    child: IconButton(
-                      onPressed: pressed,
-                      icon: const Icon(Icons.search),
-                    ),
-                  ),
-                  contentPadding: EdgeInsets.only(top: 15.sp),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10.sp),
+            child: Neumorphic(
+              style: NeumorphicStyle(
+                shadowLightColor: Colors.black26,
+                shadowDarkColor: Colors.black26,
+                depth: -2,
+              ),
+              child: Material(
+                color: LifestyleColors.kTaupeBackground,
+                type: MaterialType.card,
+                borderRadius: BorderRadius.circular(5.sp),
+                elevation: 0,
+                child: TextFormField(
+                  style: TextStyle(fontFamily: LifestyleFonts.kComorantBold),
+                  controller: controller,
+                  onFieldSubmitted: submmit,
+                  decoration: InputDecoration(
+                    prefixIcon: Padding(
+                      padding: EdgeInsets.only(
+                        left: 1.w,
                       ),
-                      borderSide: BorderSide.none),
-                  hintStyle: const TextStyle(fontFamily: 'Comorant-Regular'),
-                  hintText: 'Search products..',
+                      child: IconButton(
+                        onPressed: pressed,
+                        icon: const Icon(Icons.search),
+                      ),
+                    ),
+                    contentPadding: EdgeInsets.only(top: 15.sp),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10.sp),
+                        ),
+                        borderSide: BorderSide.none),
+                    hintStyle: const TextStyle(fontFamily: 'Comorant-Regular'),
+                    hintText: 'Search products..',
+                  ),
                 ),
               ),
             ),

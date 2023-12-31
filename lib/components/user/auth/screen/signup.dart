@@ -202,6 +202,7 @@ class _AuthScreenState extends ConsumerState<SignUpScreen> {
 
   Widget buildEmailEdittor() {
     return FloatingTextEditor(
+      maxLine: 1,
       focusNode: emailFocusNode,
       controller: _emailController,
       label: const MediumText(
@@ -227,6 +228,7 @@ class _AuthScreenState extends ConsumerState<SignUpScreen> {
 
   Widget buildPasswordEdittor() {
     return FloatingTextEditor(
+      maxLine: 1,
       obscureText: _obscureText,
       focusNode: passwordFocusNode,
       controller: _passwordController,

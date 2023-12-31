@@ -81,6 +81,8 @@ dependencies:
   firebase_auth: ^4.15.0
   socket_io_client: ^2.0.3+1
   flutter_screenutil: ^5.9.0
+  neumorphic_ui: ^1.0.1
+  flutter_sequence_animation: ^4.0.0
   # ui_common:
   #   git: https://github.com/Victor-Oluwa/common-frontend.git
 

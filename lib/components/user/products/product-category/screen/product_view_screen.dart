@@ -12,8 +12,8 @@ import 'package:lifestyle/routes-management/lifestyle_routes_names.dart';
 import '../../../../../Common/widgets/medium_text.dart';
 import '../../../../../models-classes/category.dart';
 
-class ProductsViewScreen extends ConsumerWidget {
-  const ProductsViewScreen({
+class CategoryProductsScreen extends ConsumerWidget {
+  const CategoryProductsScreen({
     super.key,
     required this.category,
   });
@@ -27,28 +27,15 @@ class ProductsViewScreen extends ConsumerWidget {
   // x.Get.arguments;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.black,
-        title: MediumText(
-          font: comorant,
-          text: category.name.toUpperCase(),
-          color: Colors.white,
-          size: 18.sp,
-        ),
-      ),
-      backgroundColor: LifestyleColors.kTaupeBackground,
-      body: ProductView(
-        topPadding: 0.0,
-        category: category,
-      ),
+    return CategoryProduct(
+      topPadding: 0.0,
+      category: category,
     );
   }
 }
 
-class ProductView extends ConsumerWidget {
-  const ProductView({
+class CategoryProduct extends ConsumerWidget {
+  const CategoryProduct({
     super.key,
     required this.category,
     this.animation = const AlwaysStoppedAnimation<double>(1),
@@ -62,7 +49,23 @@ class ProductView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final productCategoriesFunction =
         ref.watch(productCategoriesFunctionProvider);
-    return productCategoriesFunction.buildProductsView(
-        animation: animation, topPadding: 0.0, category: category, ref: ref);
+    return Scaffold(
+        backgroundColor: LifestyleColors.kTaupeBackground,
+        // appBar: AppBar(
+        //   elevation: 0,
+        //   backgroundColor: Colors.transparent,
+        //   title: MediumText(
+        //     font: comorant,
+        //     text: category.name.toUpperCase(),
+        //     color: Colors.white,
+        //     size: 18.sp,
+        //   ),
+        // ),
+        body: productCategoriesFunction.buildProductsView(
+          animation: animation,
+          topPadding: 0.0,
+          category: category,
+          ref: ref,
+        ));
   }
 }

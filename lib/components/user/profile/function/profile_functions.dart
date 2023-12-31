@@ -70,15 +70,20 @@ class ProfileFunctions {
   }
 
   loadUserPicture() {
+    // if (getuserPic() == '' || getuserPic().isEmpty) {
+    //   return Image.asset(
+    //     'images/defaultProfilePic.jpeg',
+    //     fit: BoxFit.cover,
+    //   );
+    // }
+    // return networkImageCacher(
+    //   getuserPic(),
+    // );
+
     if (getuserPic() == '' || getuserPic().isEmpty) {
-      return Image.asset(
-        'images/defaultProfilePic.jpeg',
-        fit: BoxFit.cover,
-      );
+      return 'images/defaultProfilePic.jpeg';
     }
-    return networkImageCacher(
-      getuserPic(),
-    );
+    return getuserPic();
   }
 
   Future<bool> checkInternetConnection() async {
@@ -138,19 +143,36 @@ class ProfileFunctions {
         switch (isEmpty) {
           case false:
             return OrdersPageviewWidget(
+              isEmpty: false,
               orders: data,
               profileFunctions: profileFunctions,
             );
           case true:
-            return const EmptyOrdersPageviewWidget();
+            return OrdersPageviewWidget(
+              isEmpty: true,
+              orders: [Order.empty()],
+              profileFunctions: profileFunctions,
+            );
 
           default:
-            return const EmptyOrdersPageviewWidget();
+            return OrdersPageviewWidget(
+              isEmpty: true,
+              orders: [Order.empty()],
+              profileFunctions: profileFunctions,
+            );
         }
       }, error: (_, error) {
-        return const EmptyOrdersPageviewWidget();
+        return OrdersPageviewWidget(
+          isEmpty: true,
+          orders: [Order.empty()],
+          profileFunctions: profileFunctions,
+        );
       }, loading: () {
-        return const LoadingIndicator();
+        return OrdersPageviewWidget(
+          isEmpty: true,
+          orders: [Order.empty()],
+          profileFunctions: profileFunctions,
+        );
       });
     } else {
       return NoInternetWidget(

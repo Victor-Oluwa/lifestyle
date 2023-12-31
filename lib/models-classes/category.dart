@@ -61,9 +61,9 @@ final _category = ProductCategory(
 );
 
 const _imagesUrls = [
-  'images/0.jpeg',
-  'images/armchair.jpeg',
-  'images/Sofa2.jpeg',
+  'images/Sofa.cat.png',
+  'images/arm.png',
+  'images/table.png',
   'images/bedd.jpeg',
   'images/accessoriess.jpeg',
   'images/light.jpeg'

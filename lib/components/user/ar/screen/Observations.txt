@@ -1,0 +1,3 @@
+Observations
+1. Remove TweenAnimationBuilder from CategoryCard (Disregard)
+2. Toggle expand to true of false

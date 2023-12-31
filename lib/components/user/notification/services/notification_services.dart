@@ -153,7 +153,6 @@ class NotificationServices {
         'Content-Type': 'application/json; charset=UTF-8',
         AppConstants.authToken: user.token,
       });
-      log('Fetch all product Res: ${res.body}');
       httpErrorHandling(
           response: res,
           onSuccess: () {
@@ -201,9 +200,10 @@ class NotificationServices {
 
   Future<void> sendNotification(
       {required String title,
+      required String preview,
       required String body,
-      required File image,
-      required String action}) async {
+      required String action,
+      required String actionData}) async {
     final users = await getUsers();
     final List<String> userIds = users.map((user) => user.id).toList();
 
@@ -212,27 +212,24 @@ class NotificationServices {
     };
 
     try {
-      // final imageUrl =
-      //     await getNotificationImageUrl(title: title, image: image);
-
       final response = await http.post(
         Uri.parse('$uri/send-notification'),
         headers: headers,
         body: jsonEncode({
           'userIds': userIds,
           'title': title,
+          'preview': preview,
           'body': body,
-          'image': 'imageUrl',
+          'read': false,
           'action': action,
+          'actionData': actionData,
         }),
       );
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        log('Response from backend: ${response.body}');
+      if (response.statusCode == 200) {
         x.Get.showSnackbar(const x.GetSnackBar(
           duration: Duration(seconds: 4),
           backgroundColor: Colors.black,
-          message:
-              'Congratulations! Your notification has been sent to all users',
+          message: 'Notifications sent successfully!',
         ));
       } else {
         throw APIException(
@@ -242,6 +239,7 @@ class NotificationServices {
       dropperMessage('Attention', 'An error occured. Please try again later');
       log('Notification error ${e.statusCode} Error: ${e.message}');
     } catch (e) {
+      dropperMessage('Attention', 'An error occured. Please try again later');
       log('Notification error: $e');
     }
   }

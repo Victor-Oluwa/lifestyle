@@ -25,4 +25,5 @@ class LifestyleRouteName {
   static const String cacheRoute = '/cache-route';
   static const String deliveryDetails = '/delivery-details';
   static const String orderTracking = '/order-tracking';
+  static const String notificationsRoute = '/notification-screen';
 }

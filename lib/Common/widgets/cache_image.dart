@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lifestyle/Common/colors/lifestyle_colors.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'medium_text.dart';
 
@@ -17,13 +16,15 @@ final customCacheManager = CacheManager(
   ),
 );
 
-CachedNetworkImage networkImageCacher(
-  String url, {
-  Color placeHolderColor = LifestyleColors.white,
-}) {
+CachedNetworkImage networkImageCacher(String url,
+    {Color placeHolderColor = LifestyleColors.white,
+    BlendMode? colorBlendMode,
+    Color? color}) {
   return CachedNetworkImage(
     fit: BoxFit.cover,
     cacheManager: customCacheManager,
+    colorBlendMode: colorBlendMode,
+    color: color,
     imageUrl: url,
     placeholder: (context, url) => FaIcon(
       color: placeHolderColor,

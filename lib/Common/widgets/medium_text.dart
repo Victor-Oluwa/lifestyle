@@ -8,7 +8,7 @@ class MediumText extends StatelessWidget {
   const MediumText({
     Key? key,
     required this.text,
-    this.color = LifestyleColors.kTaupeDarkened,
+    this.color = LifestyleColors.black,
     this.size = 15,
     this.maxLine,
     this.font = LifestyleFonts.kComorantMedium,

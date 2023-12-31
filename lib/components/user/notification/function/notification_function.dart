@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle/Common/widgets/utils.dart';
 import 'package:lifestyle/components/user/notification/services/notification_services.dart';
@@ -57,7 +58,7 @@ class NotificationFunction {
       {required String selectedAction, required WidgetRef ref}) {
     switch (selectedAction) {
       case 'Navigate':
-        return ref.read(navigateToScreenValueProvider);
+        return ref.read(navigateValueProvider);
       case 'Launch Url':
         return ref.read(launchUrlValueProvider);
       case 'No call to action':
@@ -71,25 +72,30 @@ class NotificationFunction {
 
   Future<void> sendNotification(
       {required String title,
-      required String body,
+      required String preview,
+      required String message,
       required String action,
-      required File image,
-      required titleFormKey,
-      required bodyFormKey}) async {
+      required String actionData}) async {
     final notificationServices = getNotificationServices();
 
-    // if (title.isNotEmpty && body.isNotEmpty /*&& image.path != 'null'*/) {
-    // print(image);
-
     return notificationServices.sendNotification(
-        title: 'title', body: 'body', image: File('No_file'), action: 'action');
-    // } else {
-    // dropperMessage('Empty Field', 'Attend to all fields');
-    // }
+      actionData: actionData,
+      title: title,
+      preview: preview,
+      body: message,
+      action: action,
+    );
   }
 
   initNotification() async {
     final notificationServices = getNotificationServices();
     return await notificationServices.initNotification();
+  }
+
+  invalidateNotificationActionsProviders(WidgetRef ref) {
+    ref.invalidate(selectedActionProvider);
+    ref.invalidate(selectedActionValueProvider);
+    ref.invalidate(navigateValueProvider);
+    ref.invalidate(launchUrlValueProvider);
   }
 }

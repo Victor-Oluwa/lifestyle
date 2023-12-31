@@ -1,20 +1,26 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
+import 'package:neumorphic_ui/neumorphic_ui.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+
 import 'package:lifestyle/components/admin/admin-tab/admin_tab.dart';
 import 'package:lifestyle/components/user/cart/widgets/detailsConfirmation/edit_details_dialog.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:lifestyle/components/user/products/product-category/widgets/parallax_image_card.dart';
 
 import '../../../../Common/colors/lifestyle_colors.dart';
 import '../../../../Common/fonts/lifestyle_fonts.dart';
 import '../../../../Common/widgets/medium_text.dart';
 import '../../../../models-classes/user.dart';
+import '../../../../routes-management/lifestyle_routes_names.dart';
 import '../../../../state/providers/actions/provider_operations.dart';
 import '../../home/widgets/cart_badge_widget.dart';
 import '../function/profile_functions.dart';
+import '../screens/user_details_screen.dart';
 
-class UserImageAndSideIconWidget extends ConsumerWidget {
-  const UserImageAndSideIconWidget({
+class UserImageAndButtons extends ConsumerWidget {
+  const UserImageAndButtons({
     Key? key,
     required this.profileFunctions,
     required this.user,
@@ -25,78 +31,135 @@ class UserImageAndSideIconWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Positioned(
-      top: 5.h,
-      child: Center(
-        child: Stack(
+    return Center(
+      child: Stack(
+        // fit: StackFit.expand,
+        children: [
+          buildUserImage(context),
+          buildSideIcons(context, ref),
+          Align(
+            alignment: Alignment.bottomRight,
+            // bottom: 0.001.h,
+            child: Padding(
+              padding: EdgeInsets.only(right: 3.5.w),
+              child: IconButton(
+                  onPressed: () {
+                    Get.offAll(() => const AdminTab());
+                  },
+                  icon: sideIcons(Icons.switch_account_outlined)),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildUserImage(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: AnimatedContainer(
+        duration: kThemeAnimationDuration,
+        curve: Curves.fastOutSlowIn,
+        transform: Matrix4.translationValues(0.0, 0, 0),
+        margin: EdgeInsets.only(right: 8.5.h),
+        // padding: EdgeInsets.only(bottom: 30.h),
+        width: 70.w,
+        height: 70.h,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(15.sp),
+          ),
+          color: LifestyleColors.kMiniBlack,
+        ),
+        child: UserImageCard(
+            expand: false,
+            onTap: () async {
+              // await Navigator.push(
+              //   context,
+              //   PageRouteBuilder<void>(
+              //     transitionDuration: const Duration(milliseconds: 500),
+              //     reverseTransitionDuration: const Duration(milliseconds: 500),
+              //     pageBuilder: (_, animation, __) => FadeTransition(
+              //       opacity: animation,
+              //       child: const UserDetailsScreen(),
+              //     ),
+              //   ),
+              // );
+              Get.to(
+                () => const UserDetailsScreen(),
+                duration: Duration(microseconds: 700),
+                transition: Transition.fadeIn,
+              );
+            },
+            user: user,
+            profileFunctions: profileFunctions),
+      ),
+    );
+  }
+
+  buildSideIcons(BuildContext context, WidgetRef ref) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Neumorphic(
+        padding: EdgeInsets.symmetric(
+          // horizontal: 2.w,
+          vertical: 2.h,
+        ),
+        margin: EdgeInsets.only(right: 4.w, bottom: 7.h),
+        style: const NeumorphicStyle(
+          shape: NeumorphicShape.flat,
+          shadowLightColor: Colors.black26,
+          depth: -1,
+          color: LifestyleColors.kTaupeBackground,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            buildUserImageContainer(),
-            buildLogoutButton(),
-            buildProfilePictureButton(),
-            buildEditButton(ref: ref, context: context),
-            buildCartButton(ref),
-            buildSwitchToAdminButton(user),
+            IconButton(
+                padding: EdgeInsets.zero,
+                onPressed: () {
+                  profileFunctions.updateProfile(
+                    user: user,
+                  );
+                },
+                icon: sideIcons(Icons.add_a_photo)),
+            SizedBox(height: 2.h),
+            IconButton(
+                padding: EdgeInsets.zero,
+                onPressed: () {
+                  Get.toNamed(LifestyleRouteName.cartRoute);
+                },
+                icon: sideIcons(Icons.shopping_cart_checkout_sharp)),
+            SizedBox(height: 2.h),
+            IconButton(
+                padding: EdgeInsets.zero,
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => EditBillingDetailsDialog(ref: ref));
+                },
+                icon: sideIcons(Icons.edit_document)),
+            SizedBox(height: 2.h),
+            IconButton(
+                padding: EdgeInsets.zero,
+                onPressed: () {
+                  profileFunctions.logOut();
+                },
+                icon: sideIcons(Icons.logout_outlined)),
           ],
         ),
       ),
     );
   }
 
-  Widget buildCartButton(WidgetRef ref) {
-    return Positioned(
-      right: 1.8.w,
-      top: 2.h,
-      child: GestureDetector(
-          onTap: () => ref.read(homeFunctionProvider).navigateToCartScreen(),
-          child: CartBadgeWidget(
-            user: user,
-            ref: ref,
-            iconData: Icons.shopping_cart_checkout_sharp,
-          )),
-    );
-  }
-
-  buildSwitchToAdminButton(User user) {
-    return user.type == 'admin'
-        ? Positioned(
-            right: 1.8.w,
-            top: 25.h,
-            child: InkWell(
-              onTap: () {
-                Get.offAll(() => const AdminTab());
-              },
-              child: const Icon(
-                Icons.switch_account,
-                color: LifestyleColors.kTaupeDarkened,
-              ),
-            ),
-          )
-        : const Text('');
-  }
-
-  Widget buildUserImageContainer() {
-    return Container(
-      padding: EdgeInsets.only(right: 10.w),
-      decoration: const BoxDecoration(
-        border:
-            Border(right: BorderSide(color: LifestyleColors.kTaupeDarkened)),
-        color: Colors.transparent,
-      ),
-      child: buildUserImage(),
-    );
-  }
-
-  Widget buildUserImage() {
-    return Container(
-      width: 70.w,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(15.sp),
-        ),
-        color: Colors.blue,
-        // image: profileFunctions.loadUserPicture(),
-      ),
-      child: buildUserDetails(),
+  ShadowIcon sideIcons(IconData icon) {
+    return ShadowIcon(
+      icon: icon,
+      color: LifestyleColors.kTaupeBackground,
+      depth: 2,
+      size: 25,
+      shadowLightColor: LifestyleColors.black,
+      // border: NeumorphicBorder(color: LifestyleColors.productBackground),
     );
   }
 
@@ -163,57 +226,76 @@ class UserImageAndSideIconWidget extends ConsumerWidget {
       ),
     ];
   }
+}
 
-  Widget buildLogoutButton() {
-    return Positioned(
-      right: 1.8.w,
-      top: 20.h,
-      child: InkWell(
-        onTap: () {
-          profileFunctions.logOut();
-        },
-        child: const Icon(
-          Icons.logout,
-          color: LifestyleColors.kTaupeDarkened,
-        ),
-      ),
-    );
-  }
-
-  Widget buildEditButton(
-      {required WidgetRef ref, required BuildContext context}) {
-    return Positioned(
-      right: 1.8.w,
-      top: 14.h,
-      child: InkWell(
-        onTap: () {
-          showDialog(
-              context: context,
-              builder: (context) => EditBillingDetailsDialog(ref: ref));
-        },
-        child: const Icon(
-          Icons.edit_document,
-          color: LifestyleColors.kTaupeDarkened,
-        ),
-      ),
-    );
-  }
-
-  Widget buildProfilePictureButton() {
-    return Positioned(
-      right: 2.w,
-      top: 8.h,
-      child: InkWell(
-        onTap: () {
-          profileFunctions.updateProfile(
-            user: user,
-          );
-        },
-        child: const Icon(
-          Icons.add_a_photo,
-          color: LifestyleColors.kTaupeDarkened,
-        ),
-      ),
+class ShadowIcon extends StatelessWidget {
+  const ShadowIcon({
+    Key? key,
+    this.color,
+    this.depth,
+    this.size = 20,
+    required this.icon,
+    this.border = const NeumorphicBorder.none(),
+    this.shadowLightColor,
+    this.intensity,
+  }) : super(key: key);
+  final Color? color;
+  final double? depth;
+  final double size;
+  final IconData icon;
+  final NeumorphicBorder border;
+  final Color? shadowLightColor;
+  final double? intensity;
+  @override
+  Widget build(BuildContext context) {
+    return NeumorphicIcon(
+      icon,
+      size: size,
+      style: NeumorphicStyle(
+          intensity: intensity,
+          depth: depth,
+          color: color,
+          border: border,
+          shadowLightColor: shadowLightColor),
     );
   }
 }
+
+class UserImageCard extends StatelessWidget {
+  const UserImageCard({
+    Key? key,
+    required this.user,
+    required this.onTap,
+    required this.expand,
+    required this.profileFunctions,
+  }) : super(key: key);
+  final User user;
+  final VoidCallback onTap;
+  final bool expand;
+  final ProfileFunctions profileFunctions;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Hero(
+        tag: user.id,
+        child: ParallaxImageCard(
+            isAsset: profileFunctions.getuserPic() == '' ||
+                    profileFunctions.getuserPic().isEmpty
+                ? true
+                : false,
+            imageUrl: profileFunctions.loadUserPicture()),
+      ),
+    );
+    // return
+  }
+}
+
+// Neumorphic(
+//  style = NeumorphicStyle(
+//    boxShape: NeumorphicBoxShape.path(SharpEdgesPathProvider()),
+//    // Other style properties...
+//  ),
+// //  child: // Your child widget here...
+// )

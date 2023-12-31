@@ -8,12 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lifestyle/components/user/home/screens/home.dart';
 import 'package:lifestyle/Common/widgets/custom_icon0_icons.dart';
+import 'package:lifestyle/components/user/profile/widgets/user_image_and_side_icon_widget.dart';
+import 'package:neumorphic_ui/neumorphic_ui.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../../Common/colors/lifestyle_colors.dart';
 import '../../../../state/providers/actions/provider_operations.dart';
 import '../../Documents/screens/document_view.dart';
 import '../../ar/screen/ar_blank_page.dart';
 import '../../notification/function/notification_function.dart';
+import '../../notification/screen/demo_noti.dart';
 import '../../profile/screens/profile_page.dart';
 
 class TabPage extends ConsumerStatefulWidget {
@@ -39,7 +42,8 @@ class _TabPageState extends ConsumerState<TabPage> {
   List pages = [
     const HomePage(),
     const DocumentsView(),
-    const ArBlankPage(),
+    // const ArBlankPage((),
+    const NotificationScreen(),
     const ProfilePage(),
   ];
   int currentIndex = 0;
@@ -84,62 +88,74 @@ class _TabPageState extends ConsumerState<TabPage> {
             items: [
               BottomNavigationBarItem(
                 activeIcon: Container(
-                  padding: EdgeInsets.all(5.sp),
-                  decoration: const BoxDecoration(),
-                  child: Icon(
-                    Icons.home,
-                    color: Colors.white,
-                    size: 23.sp,
-                  ),
-                ),
-                icon: Icon(
-                  Icons.home,
-                  color: const Color(0xFF675E57),
-                  size: 23.sp,
+                    padding: EdgeInsets.all(5.sp),
+                    decoration: const BoxDecoration(),
+                    child: ShadowIcon(
+                      icon: Icons.home,
+                      size: 30.sp,
+                      color: LifestyleColors.kTaupeBackground,
+                      shadowLightColor: LifestyleColors.black,
+                    )),
+                icon: ShadowIcon(
+                  icon: Icons.home,
+                  size: 30.sp,
+                  color: LifestyleColors.kTaupeBackground,
+                  shadowLightColor: LifestyleColors.black,
                 ),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
                   activeIcon: Container(
-                      padding: EdgeInsets.all(5.sp),
-                      decoration: const BoxDecoration(),
-                      child: const Icon(
-                        CustomIcon0.doctext,
-                        color: Colors.white,
-                      )),
-                  icon: const Icon(
-                    CustomIcon0.doctext,
-                    color: Color(0xFF675E57),
+                    padding: EdgeInsets.all(5.sp),
+                    decoration: const BoxDecoration(),
+                    child: ShadowIcon(
+                      icon: Icons.folder,
+                      size: 30.sp,
+                      color: LifestyleColors.kTaupeBackground,
+                      shadowLightColor: LifestyleColors.black,
+                    ),
+                  ),
+                  icon: ShadowIcon(
+                    icon: Icons.folder,
+                    size: 30.sp,
+                    color: LifestyleColors.kTaupeBackground,
+                    shadowLightColor: LifestyleColors.black,
                   ),
                   label: 'Docs'),
               BottomNavigationBarItem(
                   activeIcon: Container(
                     padding: EdgeInsets.all(5.sp),
                     decoration: const BoxDecoration(),
-                    child: Image.asset(
-                      height: 4.h,
-                      'images/ARw.png',
+                    child: ShadowIcon(
+                      icon: Icons.zoom_in_map_outlined,
+                      size: 30.sp,
+                      color: LifestyleColors.kTaupeBackground,
+                      shadowLightColor: LifestyleColors.black,
                     ),
                   ),
-                  icon: Image.asset(
-                    height: 4.h,
-                    'images/ARb.png',
+                  icon: ShadowIcon(
+                    icon: Icons.zoom_in_map_outlined,
+                    size: 30.sp,
+                    color: LifestyleColors.kTaupeBackground,
+                    shadowLightColor: LifestyleColors.black,
                   ),
                   label: 'AR Mode'),
               BottomNavigationBarItem(
                 activeIcon: Container(
-                  padding: EdgeInsets.all(1.sp),
+                  padding: EdgeInsets.all(5.sp),
                   decoration: const BoxDecoration(),
-                  child: Icon(
-                    CustomIcon0.useroutline,
-                    color: Colors.white,
-                    size: 21.sp,
+                  child: ShadowIcon(
+                    icon: Icons.person_2,
+                    size: 30.sp,
+                    color: LifestyleColors.kTaupeBackground,
+                    shadowLightColor: LifestyleColors.black,
                   ),
                 ),
-                icon: Icon(
-                  CustomIcon0.useroutline,
-                  color: const Color(0xFF675E57),
-                  size: 21.sp,
+                icon: ShadowIcon(
+                  icon: Icons.person_2,
+                  size: 30.sp,
+                  color: LifestyleColors.kTaupeBackground,
+                  shadowLightColor: LifestyleColors.black,
                 ),
                 label: 'Profile',
               ),

@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:lifestyle/Common/strings/strings.dart';
+import 'package:lifestyle/components/user/products/product-category/widgets/parallax_image_card.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../Common/colors/lifestyle_colors.dart';
@@ -12,47 +16,44 @@ class OrdersPageviewWidget extends StatelessWidget {
     Key? key,
     required this.orders,
     required this.profileFunctions,
+    required this.isEmpty,
   }) : super(key: key);
   final List<Order> orders;
   final ProfileFunctions profileFunctions;
+  final bool isEmpty;
 
   @override
   Widget build(BuildContext context) {
     final PageController pageController = PageController(viewportFraction: 0.8);
 
-    return SizedBox(
-      height: 45.w,
-      width: double.infinity,
-      child: PageView.builder(
-          itemCount: orders.length,
-          controller: pageController,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {},
-              child: Container(
-                padding: EdgeInsets.all(1.h),
-                margin: EdgeInsets.only(bottom: 2.h, left: 5.w, top: 1.h),
-                height: 34.h,
-                width: 80.w,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: LifestyleColors.kTaupeDarkened,
-                  ),
-                  borderRadius: BorderRadius.circular(1.sp),
-                ),
-                child: GestureDetector(
-                  onTap: () {
-                    profileFunctions.navigateOrderDetailsScreen(orders[index]);
-                  },
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12.sp),
-                      child: networkImageCacher(
-                          orders[index].products[0].images[0])),
-                ),
+    return PageView.builder(
+        itemCount: !isEmpty ? orders.length : 7,
+        controller: pageController,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              !isEmpty
+                  ? profileFunctions.navigateOrderDetailsScreen(orders[index])
+                  : log('Order is empty');
+            },
+            child: Container(
+              padding: EdgeInsets.only(
+                top: 1.h,
+                left: 2.w,
+                right: 2.w,
+                bottom: 3.h,
               ),
-            );
-          }),
-    );
+              // margin: EdgeInsets.only(bottom: 5.h),
+              child: ParallaxImageCard(
+                  parallaxValue: -30.0,
+                  boxFit: isEmpty ? BoxFit.contain : BoxFit.cover,
+                  isAsset: isEmpty ? true : false,
+                  imageUrl: !isEmpty
+                      ? orders[index].products[0].images[0]
+                      : 'images/no_order.png'),
+            ),
+          );
+        });
   }
 }
