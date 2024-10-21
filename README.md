@@ -79,4 +79,4 @@ I am also working on creating a youtube channel where I'll teach people flutter 
 <img src="/Tracking.png" width="20%" height="20%">
 
 
-Quick one, guys: Some improvements have been made to the UI, such as fixing inconsistent text colors and addressing other minor faults. I'm currently quite busy, but I'll update the screenshots as soon as possible.
+Some improvements have been made to the UI. Screenshots will be updated soon.
